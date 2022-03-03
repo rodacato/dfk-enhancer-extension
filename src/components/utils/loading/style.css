@@ -1,0 +1,53 @@
+@keyframes loader-animation {
+	0%,
+	50% {
+		box-shadow: -.5em 0 0 currentcolor;
+		background-color: transparent;
+	}
+	100% {
+		box-shadow: -.5em 0 0 transparent;
+		background-color: currentcolor;
+	}
+}
+
+.loading-box {
+	display: inline-block;
+	border-radius: 3px;
+	float: right;
+	padding: 1em;
+	position: relative;
+	margin-bottom: .25em;
+	vertical-align: top;
+}
+
+.loading-box .loading-gift {
+	position: relative;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	color: inherit;
+	vertical-align: middle;
+	pointer-events: none;
+}
+
+
+.loading-box .loading-gift::before,
+.loading-box .loading-gift::after {
+	content: '';
+	display: block;
+	position: absolute;
+	background-color: currentcolor;
+	left: 50%;
+	right: 0;
+	top: 0;
+	bottom: 50%;
+	box-shadow: -.5em 0 0 currentcolor;
+	animation: loader-animation 1s linear infinite;
+}
+
+.loading-box .loading-gift::after {
+    top: 50%;
+	bottom: 0;
+	animation-delay: .25s;
+}
+

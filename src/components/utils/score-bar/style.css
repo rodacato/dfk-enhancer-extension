@@ -1,0 +1,39 @@
+.score-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    line-height: 100%;
+    margin: 2px 5px;
+}
+.score-bar .title {
+    min-width: 40px;
+    text-align: left;
+    font-size: 10px;
+ }
+.score-bar .bar-wrapper {
+    position: relative;
+    width: 100%;
+}
+.score-bar .bar-wrapper .relative-score {
+    position: absolute;
+    left: calc(50% - 40px);
+    min-width: 80px;
+    text-align: center;
+    font-size: 8px;
+    line-height: 6px;
+    font-weight: bold;
+ }
+.score-bar .bar-wrapper .bar {
+    background-color: hsla(0,0%,100%,.2);
+    border-radius: 20px;
+    height: 5px;
+    width: 100%;
+    overflow: hidden;
+    display: block;
+ }
+.score-bar .bar-wrapper .bar-fill {
+    border-radius: 20px;
+    height: 100%;
+}
