@@ -2,15 +2,15 @@
   "manifest_version": 3,
   "name": "DeFi Kingdoms Enhancer",
   "action": {
-    "default_icon": "public/images/icon.png"
+    "default_icon": "assets/icons/icon.png"
   },
   "icons": {
-    "16": "public/images/icon_16.png",
-    "48": "public/images/icon_48.png",
-    "128": "public/images/icon_128.png"
+    "16": "assets/icons/icon_16.png",
+    "48": "assets/icons/icon_48.png",
+    "128": "assets/icons/icon_128.png"
   },
   "background": {
-    "service_worker": "background.bundle.js"
+    "service_worker": "assets/js/background.bundle.js"
   },
   "host_permissions": ["https://dfk-enhancer-service.global.ssl.fastly.net/*"],
   "content_scripts": [
@@ -19,7 +19,7 @@
         "https://*.defikingdoms.com/"
       ],
       "js": [
-        "content.bundle.js"
+        "assets/js/content.bundle.js"
       ]
     }
   ],

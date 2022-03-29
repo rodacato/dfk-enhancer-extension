@@ -1,4 +1,4 @@
-import api from '../lib/api/dfk-enhancer-service'
+import api from '../../lib/api/dfk-enhancer-service'
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(request, sender)

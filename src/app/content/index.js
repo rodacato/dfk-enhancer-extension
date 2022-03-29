@@ -1,4 +1,4 @@
-import { enhanceHeroCard } from '../lib/utils/inject'
+import { enhanceHeroCard } from '../../lib/utils/inject'
 
 const observer = new MutationObserver(function (mutations, obs) {
   document.querySelectorAll('.cardContainer').forEach((card) => {
