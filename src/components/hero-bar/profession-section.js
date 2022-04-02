@@ -3,7 +3,7 @@ import { round } from 'lodash'
 import {
   calculateOPERScore,
   getHeroClassProfessionAffinity,
-} from '../../lib/utils/hero'
+} from '../../lib/helpers/hero'
 import ScoreBar from '../utils/score-bar'
 
 function OPERScoreBar (props) {
@@ -50,13 +50,13 @@ export default function ProfessionSection (props) {
         <div className='row'>
           <div className='column profession-title'>{hero.profession}</div>
         </div>
-
+        {/* 
         <div className='row profession-scores'>
           <div className='column'>
             <AffinityScoreBar hero={hero} />
             <OPERScoreBar hero={hero} profession={hero.profession} />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

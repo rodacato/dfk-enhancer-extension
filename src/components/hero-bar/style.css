@@ -10,10 +10,18 @@
     flex-basis: 100%;
     flex: 1;
 }
+.align-center {
+    align-items: center;
+    justify-content: center;
+}
+
+
+
 
 .wrapper {
     position: relative;
     padding: 10px 15px 15px;
+    margin-bottom: 5px;
     color: #dbe3e8;
     border: 1px solid whitesmoke;
 }
@@ -21,6 +29,39 @@
 .hero-title .hero-profession {
     flex: 3;
 }
+
+
+.dfk-tavern-link {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+}
+.dfk-enhancer-about-link {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
+
+.hero-scores .tavern-score {
+    max-width: 80px;
+    max-height: 50px;
+    height: 50px;
+}
+.hero-scores .tavern-score .icon {
+    fill: white;
+    width: 18px;
+}
+.hero-scores .tavern-score .score-info .icon {
+    width: 12px;
+    margin: 3px 3px;
+}
+.hero-scores .tavern-score .score-info .percentile {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+
 
 /* .scores-summary {
     text-align: center;
@@ -49,20 +90,8 @@
 
 
 
-.dfk-tavern-link {
-    position: absolute;
-    top: 3px;
-    right: 5px;
-}
-.dfk-enhancer-about-link {
-    position: absolute;
-    bottom: 15px;
-    right: 20px;
-}
 
-
-
-.tavern-score .percentile {
+/* .tavern-score .percentile {
     font-weight: bold;
     text-align: right;
     padding: 0 5px;
@@ -88,7 +117,7 @@
 }
 .profession-section .profession-scores {
     padding-left: 10px;
-}
+} */
 
 
 .separator {

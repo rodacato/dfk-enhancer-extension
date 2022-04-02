@@ -2,7 +2,7 @@ import {
   extractSkillGenes,
   extractHeroClass,
   extractHeroRarity,
-} from '../../utils/hero-genes'
+} from '../../helpers/hero-genes'
 
 export const normalizeHero = function (data) {
   return {
@@ -58,5 +58,12 @@ export const normalizeTavernHero = function (data) {
       rank: score.pvp_rank_leaderboard,
       percentile: score.pvp_ranking,
     },
+  }
+}
+
+export const normalizeTavernHeroStatsGrowth = function (data) {
+  return {
+    initStats: data.initStats,
+    currentStats: data.currentStats,
   }
 }

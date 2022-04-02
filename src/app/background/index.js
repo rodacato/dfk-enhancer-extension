@@ -9,6 +9,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     })
   }
 
+  if (request.command === 'getHeroDFKTavernStatsGrowth') {
+    api.fetchHeroTavernStatsGrowth(request.payload.heroId).then((heroData) => {
+      sendResponse(heroData)
+    })
+  }
+
   if (request.command === 'getHero') {
     api.fetchHero(request.payload.heroId).then((heroData) => {
       sendResponse(heroData)
