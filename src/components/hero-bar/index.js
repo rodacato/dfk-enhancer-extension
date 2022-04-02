@@ -43,6 +43,32 @@ function TavernScores (props) {
   )
 }
 
+function HeroTitle (props) {
+  const { hero, tavernScore } = props
+
+  return (
+    <div>
+      <div className='row'>
+        <div className='column'>
+          <ProfessionSection
+            hero={hero}
+            bestProfession={tavernScore.profession.best}
+          />
+        </div>
+      </div>
+
+      <div className='dfk-tavern-link'>
+        <a
+          href={`https://dfktavern.com/gokmachar-ranking?heroid=${hero.id}`}
+          target='_blank'
+        >
+          <ExternalLinkIcon />
+        </a>
+      </div>
+    </div>
+  )
+}
+
 function HeroBar (props) {
   const { heroId } = props
   const [hero, setHero] = useState(null)
@@ -63,29 +89,17 @@ function HeroBar (props) {
   }
 
   return (
-    <div className='scores-summary'>
-      <div className='wrapper'>
-        <TavernScores tavernScore={tavernScore} />
-
-        <hr className='separator' />
-
-        <div className='row'>
-          <div className='column'>
-            <ProfessionSection hero={hero} />
-          </div>
+    <div className='wrapper'>
+      <div className='hero-title row'>
+        <div className='hero-profession column'>
+          <HeroTitle tavernScore={tavernScore} hero={hero} />
         </div>
-
-        <div className='dfk-tavern-link'>
-          <a
-            href={`https://dfktavern.com/gokmachar-ranking?heroid=${heroId}`}
-            target='_blank'
-          >
-            <ExternalLinkIcon />
-          </a>
-        </div>
-
-        <div className='dfk-enhancer-about-link' style={{ display: 'none' }}>
-          <Tooltip title={<QuestionIcon />}>Thanks everyone</Tooltip>
+        <div className='hero-awards column'>awards</div>
+      </div>
+      <hr className='separator' />
+      <div className='hero-scores row'>
+        <div className='column'>
+          <TavernScores tavernScore={tavernScore} />
         </div>
       </div>
     </div>

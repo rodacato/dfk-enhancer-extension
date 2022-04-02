@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 100%;
     margin: 2px 5px;
 }
@@ -17,12 +17,12 @@
     width: 100%;
 }
 .score-bar .bar-wrapper .relative-score {
-    position: absolute;
+    position: initial;
     left: calc(50% - 40px);
     min-width: 80px;
     text-align: center;
-    font-size: 8px;
-    line-height: 6px;
+    font-size: 10px;
+    line-height: 10px;
     font-weight: bold;
  }
 .score-bar .bar-wrapper .bar {

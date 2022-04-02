@@ -11,12 +11,23 @@
     flex: 1;
 }
 
-.scores-summary {
+.wrapper {
+    position: relative;
+    padding: 10px 15px 15px;
+    color: #dbe3e8;
+    border: 1px solid whitesmoke;
+}
+
+.hero-title .hero-profession {
+    flex: 3;
+}
+
+/* .scores-summary {
     text-align: center;
     padding: 12px 0;
     margin: 0 auto;
-}
-.scores-summary .wrapper {
+} */
+/* .scores-summary .wrapper {
     position: relative;
     padding: 10px 15px 15px;
     color: #dbe3e8;
@@ -34,7 +45,7 @@
 .scores-summary .wrapper .awards-bar {
     background-color: rgba(255,255,255,.2);
     border-radius: 2px;
-}
+} */
 
 
 

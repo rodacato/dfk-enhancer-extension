@@ -19,10 +19,10 @@ export default function ScoreBar (props) {
         </span>
       )}
       <div className='bar-wrapper'>
-        <span className='relative-score'>{barTitle}</span>
         <div className='bar'>
           <div className='bar-fill' style={barStyle}></div>
         </div>
+        <span className='relative-score'>{barTitle}</span>
       </div>
     </div>
   )

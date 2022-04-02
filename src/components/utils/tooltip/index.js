@@ -1,16 +1,26 @@
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
 
 import './style.css'
 
 export default function Tooltip (props) {
-  const { title } = props
+  const { title, identifier } = props
 
   return (
-    <div className='popover__wrapper'>
-      <div style={{ position: 'absolute' }}>
-        <span>{title}</span>
-        <div className='popover__content'>{props.children}</div>
-      </div>
+    <div className='tooltip-wrapper'>
+      <span data-tip data-for={identifier}>
+        {title}
+      </span>
+
+      <ReactTooltip
+        id={identifier}
+        aria-haspopup='true'
+        type='dark'
+        effect='solid'
+        place='bottom'
+      >
+        {props.children}
+      </ReactTooltip>
     </div>
   )
 }
