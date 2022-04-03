@@ -23,6 +23,10 @@ export function hasBlueStatAffinity (profession, blueGene) {
   return includes(statsOfInterest, blueGene)
 }
 
+export function getHeroClassGrowth (heroClass) {
+  return HeroStatsGrowth[heroClass]
+}
+
 export function getHeroClassProfessionAffinity (hero) {
   const statsOfInterest = HeroProfessionStats[hero.profession]
   const classGrowthStats = HeroStatsGrowth[hero.mainClass]

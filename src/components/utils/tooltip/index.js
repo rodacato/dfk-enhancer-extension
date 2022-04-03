@@ -18,6 +18,7 @@ export default function Tooltip (props) {
         type='dark'
         effect='solid'
         place='bottom'
+        clickable={true}
       >
         {props.children}
       </ReactTooltip>

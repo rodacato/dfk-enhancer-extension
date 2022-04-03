@@ -4,6 +4,17 @@ import {
   extractHeroRarity,
 } from '../../helpers/hero-genes'
 
+const STAT_ABBR_TO_NAME_MAP = {
+  STR: 'strength',
+  DEX: 'dexterity',
+  AGI: 'agility',
+  VIT: 'vitality',
+  END: 'endurance',
+  INT: 'intelligence',
+  WIS: 'wisdom',
+  LCK: 'luck',
+}
+
 export const normalizeHero = function (data) {
   return {
     id: data.id,
@@ -12,8 +23,8 @@ export const normalizeHero = function (data) {
     profession: data.profession.toLowerCase(),
     rarity: extractHeroRarity(data.rarity),
     level: data.level,
-    greenGene: data.statBoost1,
-    blueGene: data.statBoost2,
+    greenGene: STAT_ABBR_TO_NAME_MAP[data.statboost1],
+    blueGene: STAT_ABBR_TO_NAME_MAP[data.statboost2],
     statsGenes: extractSkillGenes(data.statgenes),
     visualgenes: data.visualgenes,
     professions_stats: {

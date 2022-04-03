@@ -3,6 +3,17 @@ export const DFK_ENHANCER_SERVICE_URL =
 
 export const HERO_CARD_ACTIVE_CLASS = 'dfk-ext-active'
 
+export const STAT_ABBR_MAP = {
+  strength: 'STR',
+  dexterity: 'DEX',
+  agility: 'AGI',
+  vitality: 'VIT',
+  endurance: 'END',
+  intelligence: 'INT',
+  wisdom: 'WIS',
+  luck: 'LCK',
+}
+
 // Extracted from https://docs.google.com/spreadsheets/d/1jfG6E6otW1V6ZLQycF5DumoBr_LrpQaz7cTmDPpwV2s/edit#gid=1814662006
 const warrior = {
   strength: { primary: 75, secondary: 18.75 },

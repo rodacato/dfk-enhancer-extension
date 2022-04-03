@@ -3,7 +3,7 @@ import Loading from '../utils/loading'
 import ProfessionScore from './scores/profession-score'
 import PvPScore from './scores/pvp-score'
 import SummoningScore from './scores/summoning-score'
-import ProfessionSection from './profession-section'
+import HeroTitle from './hero-title'
 import backgroundApi from '../../lib/api/background-script'
 import { ExternalLinkIcon } from '../utils/icons/solid'
 
@@ -21,7 +21,7 @@ function TavernScores (props) {
     <div className='row'>
       <div className='column'>
         <ProfessionScore
-          heroId={hero.id}
+          hero={hero}
           heroesCount={tavernScore.heroesCount}
           score={tavernScore.profession}
           stats={hero.stats}
@@ -42,32 +42,6 @@ function TavernScores (props) {
           score={tavernScore.summoning}
           statsGenes={hero.statsGenes}
         />
-      </div>
-    </div>
-  )
-}
-
-function HeroTitle (props) {
-  const { hero, tavernScore } = props
-
-  return (
-    <div>
-      <div className='row'>
-        <div className='column'>
-          <ProfessionSection
-            hero={hero}
-            bestProfession={tavernScore.profession.best}
-          />
-        </div>
-      </div>
-
-      <div className='dfk-tavern-link'>
-        <a
-          href={`https://dfktavern.com/gokmachar-ranking?heroid=${hero.id}`}
-          target='_blank'
-        >
-          <ExternalLinkIcon />
-        </a>
       </div>
     </div>
   )
@@ -100,10 +74,11 @@ function HeroBar (props) {
   return (
     <div className='wrapper'>
       <div className='hero-title row'>
-        <div className='hero-profession column'>
-          <HeroTitle tavernScore={tavernScore} hero={hero} />
-        </div>
-        <div className='hero-awards column'>awards</div>
+        <HeroTitle
+          tavernScore={tavernScore}
+          tavernStats={tavernStats}
+          hero={hero}
+        />
       </div>
       <hr className='separator' />
       <div className='hero-scores'>
@@ -112,6 +87,15 @@ function HeroBar (props) {
           tavernScore={tavernScore}
           tavernStats={tavernStats}
         />
+      </div>
+
+      <div className='dfk-tavern-link'>
+        <a
+          href={`https://dfktavern.com/gokmachar-ranking?heroid=${hero.id}`}
+          target='_blank'
+        >
+          <ExternalLinkIcon />
+        </a>
       </div>
     </div>
   )

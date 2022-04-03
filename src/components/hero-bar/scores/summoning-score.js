@@ -5,22 +5,26 @@ import Gauge from '../../utils/gauge'
 import Tooltip from '../../utils/tooltip'
 
 function InfoDetails (props) {
-  const { statsGenes, heroId } = props
+  const { statsGenes, heroId, rank } = props
 
   return (
     <Tooltip title={<InfoIcon />} identifier={`summoning-score-${heroId}`}>
       <div className='column'>
-        <div>
+        <div className='tooltip-content-title row'>
+          <span>Rank:</span>
+          <span className='rank-number'>{rank.toLocaleString()}</span>
+        </div>
+        <div className='tooltip-content-table'>
           <span>Genes Basic</span>
           <table>
             <tbody>
               <tr>
-                <td>Type</td>
-                <td>Main</td>
-                <td>Sub</td>
-                <td>Prof</td>
-                <td>Stat Boost 1</td>
-                <td>Stat Boost 2</td>
+                <th>Type</th>
+                <th>Main</th>
+                <th>Sub</th>
+                <th>Prof</th>
+                <th>Stat Boost 1</th>
+                <th>Stat Boost 2</th>
               </tr>
               {Object.keys(statsGenes).map((key) => {
                 return (
@@ -38,16 +42,16 @@ function InfoDetails (props) {
           </table>
         </div>
 
-        <div>
+        <div className='tooltip-content-table'>
           <span>Genes Ability</span>
           <table>
             <tbody>
               <tr>
-                <td>Type</td>
-                <td>Active 1</td>
-                <td>Active 2</td>
-                <td>Passive 1</td>
-                <td>Passive 2</td>
+                <th>Type</th>
+                <th>Active 1</th>
+                <th>Active 2</th>
+                <th>Passive 1</th>
+                <th>Passive 2</th>
               </tr>
               {Object.keys(statsGenes).map((key) => {
                 return (
@@ -81,7 +85,7 @@ export default function SummoningScore (props) {
           </div>
           <div className='row score-info'>
             <div className='percentile'>{round(percentile, 1)}%</div>
-            <InfoDetails statsGenes={statsGenes} heroId={heroId} />
+            <InfoDetails statsGenes={statsGenes} rank={rank} heroId={heroId} />
           </div>
         </div>
       </Gauge>

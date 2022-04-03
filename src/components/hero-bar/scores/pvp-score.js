@@ -9,45 +9,13 @@ import {
   PointElement,
   LineElement,
   Filler,
-  Legend,
 } from 'chart.js'
 import { Radar } from 'react-chartjs-2'
 
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Legend)
-
-// {
-//   "initStats": {
-//       "strength": 7,
-//       "intelligence": 9,
-//       "wisdom": 6,
-//       "luck": 8,
-//       "agility": 7,
-//       "vitality": 6,
-//       "endurance": 7,
-//       "dexterity": 12,
-//       "hp": 135,
-//       "mp": 40,
-//       "total": 62,
-//       "level": 1
-//   },
-//   "currentStats": {
-//       "strength": 7,
-//       "intelligence": 9,
-//       "wisdom": 6,
-//       "luck": 8,
-//       "agility": 7,
-//       "vitality": 6,
-//       "endurance": 7,
-//       "dexterity": 12,
-//       "hp": 135,
-//       "mp": 40,
-//       "total": 62,
-//       "level": 1
-//   }
-// }
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler)
 
 function InfoDetails (props) {
-  const { tavernStats, heroId } = props
+  const { tavernStats, heroId, rank } = props
   const labels = [
     'strength',
     'endurance',
@@ -76,7 +44,6 @@ function InfoDetails (props) {
       {
         label: 'Current Stats',
         data: at(tavernStats.currentStats, labels),
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgb(54, 162, 235)',
         borderWidth: 2,
       },
@@ -91,15 +58,62 @@ function InfoDetails (props) {
     },
   }
 
-  console.log(
-    heroId,
-    at(tavernStats.initStats, labels),
-    at(tavernStats.currentStats, labels)
-  )
-
   return (
     <Tooltip title={<InfoIcon />} identifier={`pvp-score-${heroId}`}>
-      <Radar data={data} options={options} />
+      <div className='column'>
+        <div className='tooltip-content-title row'>
+          <span>Rank:</span>
+          <span className='rank-number'>{rank.toLocaleString()}</span>
+        </div>
+        <div className='tooltip-content-table'>
+          <table>
+            <tbody>
+              <tr>
+                <td></td>
+                <td>HP</td>
+                <td>MP</td>
+                <td>Stats</td>
+              </tr>
+              <tr>
+                <td>Level 1</td>
+                <td>{tavernStats.initStats.hp}</td>
+                <td>{tavernStats.initStats.mp}</td>
+                <td>{tavernStats.initStats.total}</td>
+              </tr>
+              <tr>
+                <td>Level {tavernStats.currentStats.level}</td>
+                <td>
+                  {tavernStats.currentStats.hp}{' '}
+                  <b>
+                    (+
+                    {tavernStats.currentStats.hp - tavernStats.initStats.hp})
+                  </b>
+                </td>
+                <td>
+                  {tavernStats.currentStats.mp}{' '}
+                  <b>
+                    (+
+                    {tavernStats.currentStats.mp - tavernStats.initStats.mp})
+                  </b>
+                </td>
+                <td>
+                  {tavernStats.currentStats.total}{' '}
+                  <b>
+                    (+
+                    {tavernStats.currentStats.total -
+                      tavernStats.initStats.total}
+                    )
+                  </b>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className='tooltip-content-table'>
+          <span>Stats</span>
+          <Radar data={data} options={options} />
+        </div>
+      </div>
     </Tooltip>
   )
 }
@@ -117,7 +131,11 @@ export default function PvPScore (props) {
           </div>
           <div className='row score-info'>
             <div className='percentile'>{round(percentile, 1)}%</div>
-            <InfoDetails tavernStats={tavernStats} heroId={heroId} />
+            <InfoDetails
+              tavernStats={tavernStats}
+              rank={rank}
+              heroId={heroId}
+            />
           </div>
         </div>
       </Gauge>
