@@ -1,4 +1,5 @@
-import api from '../../lib/api/dfk-enhancer-service'
+import api from '../../lib/services/dfk-enhancer-api'
+import serendale from '../../lib/services/serendale-chain'
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(request, sender)
@@ -16,9 +17,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 
   if (request.command === 'getHero') {
-    api.fetchHero(request.payload.heroId).then((heroData) => {
+    serendale.getHero(request.payload.heroId).then((heroData) => {
+      console.log('getHero response', heroData)
       sendResponse(heroData)
     })
+
+    // api.fetchHero(request.payload.heroId).then((heroData) => {
+    //   console.log('getHero api', heroData)
+    //   sendResponse(heroData)
+    // })
   }
 
   return true

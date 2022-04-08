@@ -1,4 +1,5 @@
 import React from 'react'
+import { isEmpty, at, sum, values } from 'lodash'
 import { hasBlueStatAffinity } from '../../lib/helpers/hero'
 
 function BestProfession (props) {
@@ -13,19 +14,26 @@ function BestProfession (props) {
 }
 
 function TotalStats (props) {
-  const { tavernStats } = props
+  const { hero, tavernStats } = props
+  let initStats
+  let currentStats
 
-  if (!tavernStats) return ''
+  if (!isEmpty(tavernStats)) {
+    initStats = tavernStats.initStats
+    currentStats = tavernStats.currentStats
+  } else {
+    initStats = undefined
+    currentStats = { total: sum(values(hero.stats)), level: hero.level }
+  }
 
   return (
     <div className='hero-stat column'>
       <span className='title'>Total Stats</span>
       <span className='value'>
-        {tavernStats.currentStats.total}{' '}
-        {tavernStats.currentStats.level !== 1 && (
+        {currentStats.total}{' '}
+        {initStats && currentStats.level !== 1 && (
           <b>
-            ({tavernStats.initStats.total}+
-            {tavernStats.currentStats.total - tavernStats.initStats.total})
+            ({initStats.total}+{currentStats.total - initStats.total})
           </b>
         )}
       </span>
@@ -35,7 +43,7 @@ function TotalStats (props) {
 
 export default function HeroTitle (props) {
   const { hero, tavernScore, tavernStats } = props
-  const bestProfession = tavernScore.profession.best
+  const bestProfession = at(tavernScore, 'profession.best')
 
   return (
     <div className='hero-profession row'>
@@ -50,7 +58,7 @@ export default function HeroTitle (props) {
           )}
         </div>
       </div>
-      <TotalStats tavernStats={tavernStats} />
+      <TotalStats hero={hero} tavernStats={tavernStats} />
     </div>
   )
 }

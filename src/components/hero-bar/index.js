@@ -4,43 +4,37 @@ import ProfessionScore from './scores/profession-score'
 import PvPScore from './scores/pvp-score'
 import SummoningScore from './scores/summoning-score'
 import HeroTitle from './hero-title'
-import backgroundApi from '../../lib/api/background-script'
+import internalApi from '../../lib/services/internal-api'
 import { ExternalLinkIcon } from '../utils/icons/solid'
 
 import './style.css'
 
 function TavernScores (props) {
-  const { tavernScore, tavernStats, hero } = props
-  const { heroesCount } = tavernScore
-
-  if (!heroesCount) {
-    return <span> No data available.</span>
-  }
+  const { tavernStats, hero } = props
+  const { heroesCount, profession, pvp, summoning } = props.tavernScore
 
   return (
     <div className='row'>
       <div className='column'>
         <ProfessionScore
           hero={hero}
-          heroesCount={tavernScore.heroesCount}
-          score={tavernScore.profession}
-          stats={hero.stats}
+          score={profession}
+          heroesCount={heroesCount}
         />
       </div>
       <div className='column'>
         <PvPScore
-          heroId={hero.id}
-          heroesCount={tavernScore.heroesCount}
-          score={tavernScore.pvp}
+          hero={hero}
+          score={pvp}
+          heroesCount={heroesCount}
           tavernStats={tavernStats}
         />
       </div>
       <div className='column'>
         <SummoningScore
-          heroId={hero.id}
-          heroesCount={tavernScore.heroesCount}
-          score={tavernScore.summoning}
-          statsGenes={hero.statsGenes}
+          hero={hero}
+          score={summoning}
+          heroesCount={heroesCount}
         />
       </div>
     </div>
@@ -50,24 +44,24 @@ function TavernScores (props) {
 function HeroBar (props) {
   const { heroId } = props
   const [hero, setHero] = useState(null)
-  const [tavernScore, setTavernScore] = useState(null)
-  const [tavernStats, setTavernStats] = useState(null)
+  const [tavernScore, setTavernScore] = useState({})
+  const [tavernStats, setTavernStats] = useState({})
 
   useEffect(() => {
-    backgroundApi.getHero(heroId).then((response) => {
+    internalApi.getHero(heroId).then((response) => {
       setHero(response)
     })
 
-    backgroundApi.getHeroDFKTavernStats(heroId).then((response) => {
+    internalApi.getHeroDFKTavernStats(heroId).then((response) => {
       setTavernScore(response)
     })
 
-    backgroundApi.getHeroDFKTavernStatsGrowth(heroId).then((response) => {
+    internalApi.getHeroDFKTavernStatsGrowth(heroId).then((response) => {
       setTavernStats(response)
     })
   }, [])
 
-  if (!hero || !tavernScore) {
+  if (!hero) {
     return <Loading />
   }
 
@@ -75,9 +69,9 @@ function HeroBar (props) {
     <div className='wrapper'>
       <div className='hero-title row'>
         <HeroTitle
-          tavernScore={tavernScore}
-          tavernStats={tavernStats}
           hero={hero}
+          tavernStats={tavernStats}
+          tavernScore={tavernScore}
         />
       </div>
       <hr className='separator' />

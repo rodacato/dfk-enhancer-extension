@@ -1,0 +1,1 @@
+export { extractHeroData } from './hero'

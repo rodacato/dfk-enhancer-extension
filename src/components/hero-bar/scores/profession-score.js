@@ -46,19 +46,23 @@ function AffinityScoreBar (props) {
 
 function AffinityStatRow (props) {
   const { hero, stat } = props
-  const affinity = getHeroClassGrowth(hero.mainClass)
-  const statsOfInterest = HeroProfessionStats[hero.profession]
-  const statValues = affinity[stat]
+  const classAffinity = getHeroClassGrowth(hero.mainClass)
+  const classStatValues = classAffinity[stat].primary
+
+  const subClassAffinity = getHeroClassGrowth(hero.subClass)
+  const subClassStatValues = subClassAffinity[stat].secondary
+
   const boostedStat = hero.blueGene.toLowerCase() === stat.toLowerCase()
-  const extraClasses = includes(statsOfInterest, stat)
+  const extraClasses = includes(HeroProfessionStats[hero.profession], stat)
     ? 'profession-stat-affin'
     : ''
 
   const color = boostedStat ? '#b44d94' : '#3c6fd0'
-  const primaryValue = boostedStat ? statValues.primary + 2 : statValues.primary
+  const primaryValue = boostedStat ? classStatValues + 2 : classStatValues
+
   const secodaryValue = boostedStat
-    ? statValues.secondary + 4
-    : statValues.secondary
+    ? subClassStatValues + 4
+    : subClassStatValues
 
   return (
     <tr className={extraClasses}>
@@ -68,7 +72,7 @@ function AffinityStatRow (props) {
       </td>
       <td>{primaryValue}%</td>
       <td collspan='3'>
-        <ScoreBar color={color} current={statValues.primary} max={100} />
+        <ScoreBar color={color} current={classStatValues} max={100} />
       </td>
       <td>{secodaryValue}%</td>
     </tr>
@@ -83,7 +87,7 @@ function InfoDetails (props) {
       <div className='column'>
         <div className='tooltip-content-title row'>
           <span>Rank:</span>
-          <span className='rank-number'>{rank.toLocaleString()}</span>
+          <span className='rank-number'>{rank?.toLocaleString()}</span>
         </div>
         <div className='tooltip-content-table'>
           <span>OPER Score</span>
@@ -94,7 +98,7 @@ function InfoDetails (props) {
           <table>
             <tbody>
               <tr>
-                <td colspan='6'>
+                <td colSpan='6'>
                   <AffinityScoreBar hero={hero} />
                 </td>
               </tr>
@@ -124,15 +128,20 @@ export default function ProfessionScore (props) {
   const { heroesCount, score, hero } = props
   const { percentile, rank } = score
 
+  const currentRank = (heroesCount && heroesCount - rank) || 0
+  const minRank = heroesCount || 100000
+
   return (
     <div className='tavern-score profession-score'>
-      <Gauge current={heroesCount - rank} max={heroesCount}>
+      <Gauge current={currentRank} max={minRank}>
         <div className='column align-center'>
           <div className='profession-icon-wrapper'>
             <BookIcon />
           </div>
           <div className='row score-info'>
-            <div className='percentile'>{round(percentile, 1)}%</div>
+            <div className='percentile'>
+              {(percentile && round(percentile, 1)) || '--'}%
+            </div>
             <InfoDetails hero={hero} rank={rank} />
           </div>
         </div>

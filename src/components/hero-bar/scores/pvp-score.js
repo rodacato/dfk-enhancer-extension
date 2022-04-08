@@ -1,5 +1,5 @@
 import React from 'react'
-import { round, at } from 'lodash'
+import { isEmpty, round, at, sum, values } from 'lodash'
 import { SwordsIcon, InfoIcon } from '../../utils/icons/solid'
 import Gauge from '../../utils/gauge'
 import Tooltip from '../../utils/tooltip'
@@ -14,36 +14,57 @@ import { Radar } from 'react-chartjs-2'
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler)
 
-function InfoDetails (props) {
-  const { tavernStats, heroId, rank } = props
-  const labels = [
-    'strength',
-    'endurance',
-    'vitality',
-    'intelligence',
-    'wisdom',
-    'dexterity',
-    'agility',
-    'luck',
-  ]
+const CHART_STATS = [
+  'strength',
+  'endurance',
+  'vitality',
+  'intelligence',
+  'wisdom',
+  'dexterity',
+  'agility',
+  'luck',
+]
 
-  if (!tavernStats) {
-    return ''
+function InfoDetails (props) {
+  const { hero, tavernStats, rank } = props
+  let initStats
+  let currentStats
+
+  if (!isEmpty(tavernStats)) {
+    initStats = tavernStats.initStats
+    currentStats = tavernStats.currentStats
+  } else {
+    initStats = {
+      strength: 0,
+      endurance: 0,
+      vitality: 0,
+      intelligence: 0,
+      wisdom: 0,
+      dexterity: 0,
+      agility: 0,
+      luck: 0,
+      total: 0,
+    }
+    currentStats = {
+      ...at(hero.stats, CHART_STATS),
+      total: sum(values(hero.stats)),
+      level: hero.level,
+    }
   }
 
   const data = {
-    labels: labels,
+    labels: CHART_STATS,
     datasets: [
       {
         label: 'Initial Stats',
-        data: at(tavernStats.initStats, labels),
+        data: at(initStats, CHART_STATS),
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgb(255, 99, 132)',
         borderWidth: 2,
       },
       {
         label: 'Current Stats',
-        data: at(tavernStats.currentStats, labels),
+        data: at(currentStats, CHART_STATS),
         borderColor: 'rgb(54, 162, 235)',
         borderWidth: 2,
       },
@@ -59,11 +80,11 @@ function InfoDetails (props) {
   }
 
   return (
-    <Tooltip title={<InfoIcon />} identifier={`pvp-score-${heroId}`}>
+    <Tooltip title={<InfoIcon />} identifier={`pvp-score-${hero.id}`}>
       <div className='column'>
         <div className='tooltip-content-title row'>
           <span>Rank:</span>
-          <span className='rank-number'>{rank.toLocaleString()}</span>
+          <span className='rank-number'>{rank?.toLocaleString()}</span>
         </div>
         <div className='tooltip-content-table'>
           <table>
@@ -76,33 +97,31 @@ function InfoDetails (props) {
               </tr>
               <tr>
                 <td>Level 1</td>
-                <td>{tavernStats.initStats.hp}</td>
-                <td>{tavernStats.initStats.mp}</td>
-                <td>{tavernStats.initStats.total}</td>
+                <td>{initStats.hp}</td>
+                <td>{initStats.mp}</td>
+                <td>{initStats.total}</td>
               </tr>
               <tr>
-                <td>Level {tavernStats.currentStats.level}</td>
+                <td>Level {currentStats.level}</td>
                 <td>
-                  {tavernStats.currentStats.hp}{' '}
+                  {currentStats.hp}{' '}
                   <b>
                     (+
-                    {tavernStats.currentStats.hp - tavernStats.initStats.hp})
+                    {currentStats.hp - initStats.hp})
                   </b>
                 </td>
                 <td>
-                  {tavernStats.currentStats.mp}{' '}
+                  {currentStats.mp}{' '}
                   <b>
                     (+
-                    {tavernStats.currentStats.mp - tavernStats.initStats.mp})
+                    {currentStats.mp - initStats.mp})
                   </b>
                 </td>
                 <td>
-                  {tavernStats.currentStats.total}{' '}
+                  {currentStats.total}{' '}
                   <b>
                     (+
-                    {tavernStats.currentStats.total -
-                      tavernStats.initStats.total}
-                    )
+                    {currentStats.total - initStats.total})
                   </b>
                 </td>
               </tr>
@@ -119,23 +138,24 @@ function InfoDetails (props) {
 }
 
 export default function PvPScore (props) {
-  const { heroesCount, score, tavernStats, heroId } = props
+  const { hero, heroesCount, score, tavernStats } = props
   const { percentile, rank } = score
+
+  const currentRank = (heroesCount && heroesCount - rank) || 0
+  const minRank = heroesCount || 100000
 
   return (
     <div className='tavern-score pvp-score'>
-      <Gauge current={heroesCount - rank} max={heroesCount}>
+      <Gauge current={currentRank} max={minRank}>
         <div className='column align-center'>
           <div className='profession-icon-wrapper'>
             <SwordsIcon />
           </div>
           <div className='row score-info'>
-            <div className='percentile'>{round(percentile, 1)}%</div>
-            <InfoDetails
-              tavernStats={tavernStats}
-              rank={rank}
-              heroId={heroId}
-            />
+            <div className='percentile'>
+              {(percentile && round(percentile, 1)) || '--'}%
+            </div>
+            <InfoDetails hero={hero} rank={rank} tavernStats={tavernStats} />
           </div>
         </div>
       </Gauge>
