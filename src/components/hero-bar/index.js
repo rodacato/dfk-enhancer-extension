@@ -5,7 +5,7 @@ import PvPScore from './scores/pvp-score'
 import SummoningScore from './scores/summoning-score'
 import HeroTitle from './hero-title'
 import internalApi from '../../lib/services/internal-api'
-import { ExternalLinkIcon } from '../utils/icons/solid'
+import { ExternalLinkIcon, ReloadIcon } from '../utils/icons/solid'
 
 import './style.css'
 
@@ -47,7 +47,7 @@ function HeroBar (props) {
   const [tavernScore, setTavernScore] = useState({})
   const [tavernStats, setTavernStats] = useState({})
 
-  useEffect(() => {
+  const loadHero = function () {
     internalApi.getHero(heroId).then((response) => {
       setHero(response)
     })
@@ -59,6 +59,23 @@ function HeroBar (props) {
     internalApi.getHeroDFKTavernStatsGrowth(heroId).then((response) => {
       setTavernStats(response)
     })
+  }
+
+  const resetHero = function () {
+    setHero(null)
+    setTavernScore({})
+    setTavernStats({})
+  }
+
+  const reloadHero = function () {
+    resetHero()
+    loadHero()
+
+    return false
+  }
+
+  useEffect(() => {
+    loadHero()
   }, [])
 
   if (!hero) {
@@ -84,12 +101,18 @@ function HeroBar (props) {
       </div>
 
       <div className='dfk-tavern-link'>
-        <a
-          href={`https://dfktavern.com/gokmachar-ranking?heroid=${hero.id}`}
-          target='_blank'
-        >
-          <ExternalLinkIcon />
-        </a>
+        <div className='column'>
+          <a
+            title='Open hero on DFK Tavern'
+            href={`https://dfktavern.com/gokmachar-ranking?heroid=${hero.id}`}
+            target='_blank'
+          >
+            <ExternalLinkIcon />
+          </a>
+          <span title='Reload hero data' onClick={reloadHero}>
+            <ReloadIcon />
+          </span>
+        </div>
       </div>
     </div>
   )

@@ -1,6 +1,10 @@
 import React from 'react'
 import { isEmpty, at, sum, values } from 'lodash'
-import { hasBlueStatAffinity } from '../../lib/helpers/hero'
+import {
+  hasBlueStatAffinity,
+  hasGoodProfessionAndClassAffinity,
+  hasGoodOPERScore,
+} from '../../lib/helpers/hero'
 
 function BestProfession (props) {
   const { tavernScore } = props
@@ -49,12 +53,19 @@ export default function HeroTitle (props) {
     <div className='hero-profession row'>
       <div className='profession-name row'>
         {hero.profession}
+
         <div className='profession-awards'>
           {hero.profession === bestProfession && (
             <span title='Match profession'> 💎</span>
           )}
           {hasBlueStatAffinity(hero.profession, hero.blueGene) && (
             <span title='Blue stat match with profession'> ⭐️</span>
+          )}
+          {hasGoodOPERScore(hero) && (
+            <span title='OPER Score is higher than 60%'> 🏆</span>
+          )}
+          {hasGoodProfessionAndClassAffinity(hero) && (
+            <span title='Profession affinity is higher than 80%'> 🌡</span>
           )}
         </div>
       </div>

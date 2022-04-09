@@ -18,14 +18,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   if (request.command === 'getHero') {
     serendale.getHero(request.payload.heroId).then((heroData) => {
-      console.log('getHero response', heroData)
       sendResponse(heroData)
     })
-
-    // api.fetchHero(request.payload.heroId).then((heroData) => {
-    //   console.log('getHero api', heroData)
-    //   sendResponse(heroData)
-    // })
   }
 
   return true

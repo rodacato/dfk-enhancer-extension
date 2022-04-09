@@ -27,18 +27,3 @@ export const contracts = {
     RPC
   ),
 }
-
-// export const expansionSet = {
-//   sd: 0,
-//   cv: 0,
-// }
-
-// export const expansionArraySet = {
-//   sd: [],
-//   cv: [],
-// }
-
-// export const expansionObjSet = {
-//   sd: {},
-//   cv: {},
-// }

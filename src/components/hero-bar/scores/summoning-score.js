@@ -14,7 +14,7 @@ function InfoDetails (props) {
       ...stats[0],
     },
     {
-      title: 'R1 (~4%)',
+      title: 'R1 (~20%)',
       ...stats[1],
     },
     {
@@ -43,8 +43,8 @@ function InfoDetails (props) {
                 <th>Main</th>
                 <th>Sub</th>
                 <th>Prof</th>
-                <th>Stat Boost 1</th>
-                <th>Stat Boost 2</th>
+                <th className='greeneGene'>Stat Boost 1</th>
+                <th className='blueGene'>Stat Boost 2</th>
               </tr>
               {map(statsGenes, (stat) => {
                 return (
@@ -53,8 +53,8 @@ function InfoDetails (props) {
                     <td>{stat.class}</td>
                     <td>{stat.subClass}</td>
                     <td>{stat.profession}</td>
-                    <td>{stat.statBoost1}</td>
-                    <td>{stat.statBoost2}</td>
+                    <td className='greeneGene'>{stat.statBoost1}</td>
+                    <td className='blueGene'>{stat.statBoost2}</td>
                   </tr>
                 )
               })}

@@ -10,12 +10,30 @@
     flex-basis: 100%;
     flex: 1;
 }
+.column.two {
+    flex: 2;
+}
+.column.three {
+    flex: 3;
+}
+.column.four {
+    flex: 4;
+}
 .align-center {
     align-items: center;
     justify-content: center;
 }
 
 
+.greeneGene {
+    color: green;
+}
+.blueGene {
+    color: dodgerblue;
+}
+.purpleGene {
+    color: purple;
+}
 
 
 .wrapper {
@@ -26,9 +44,15 @@
     border: 1px solid whitesmoke;
 }
 
+.hero-title .hero-profession {
+    margin: auto 10px auto 5px;
+}
 .hero-title .hero-profession .profession-name {
     flex: 3;
     text-transform: capitalize;
+}
+.hero-title .hero-profession .hero-stat {
+    background-color: black;
 }
 
 
@@ -124,64 +148,6 @@
     font-size: 12px;
     text-align: center;
 }
-
-
-/* .scores-summary {
-    text-align: center;
-    padding: 12px 0;
-    margin: 0 auto;
-} */
-/* .scores-summary .wrapper {
-    position: relative;
-    padding: 10px 15px 15px;
-    color: #dbe3e8;
-    border: 1px solid whitesmoke;
-}
-.scores-summary .wrapper .scores-section,
-.scores-summary .wrapper .bar-section {
-    display: flex;
-    flex-direction: row;
-}
-.scores-summary .wrapper svg {
-    fill: whitesmoke;
-    width: 15px;
-}
-.scores-summary .wrapper .awards-bar {
-    background-color: rgba(255,255,255,.2);
-    border-radius: 2px;
-} */
-
-
-
-
-/* .tavern-score .percentile {
-    font-weight: bold;
-    text-align: right;
-    padding: 0 5px;
-    line-height: 20px;
-}
-.tavern-score .ranking {
-    font-size: 12px;
-    color: lightgray;
-}
-.tavern-score .profession-icon-wrapper {
-    text-align: left;
-}
-
-
-
-
-.profession-section .profession-title {
-    width: 100%;
-    text-transform: capitalize;
-    text-align: left;
-    font-size: 12px;
-    font-weight: bold;
-}
-.profession-section .profession-scores {
-    padding-left: 10px;
-} */
-
 
 .separator {
     width: 85%;

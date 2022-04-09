@@ -17,10 +17,24 @@ export function calculateOPERScore (hero) {
   }
 }
 
+export function hasGoodOPERScore (hero) {
+  const oper = calculateOPERScorePercentage(hero, hero.profession)
+
+  return oper >= 60
+}
+
 export function hasBlueStatAffinity (profession, blueGene) {
   const statsOfInterest = HeroProfessionStats[profession]
 
   return includes(statsOfInterest, blueGene)
+}
+
+export function hasGoodProfessionAndClassAffinity (hero) {
+  const heroClassProfessionAffinity = getHeroClassProfessionAffinity(hero)
+  const max = heroClassProfessionAffinity.mainClass.max
+  const current = heroClassProfessionAffinity.mainClass.value
+
+  return current >= max * 0.8
 }
 
 export function getHeroClassGrowth (heroClass) {
