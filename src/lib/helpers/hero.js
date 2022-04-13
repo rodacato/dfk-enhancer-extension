@@ -37,6 +37,27 @@ export function hasGoodProfessionAndClassAffinity (hero) {
   return current >= max * 0.8
 }
 
+export function extractStatAffinity (hero, stat) {
+  const classAffinity = getHeroClassGrowth(hero.mainClass)
+  const classStatValues = classAffinity[stat].primary
+
+  const subClassAffinity = getHeroClassGrowth(hero.subClass)
+  const subClassStatValues = subClassAffinity[stat].secondary
+
+  const boostedStat = hero.blueGene.toLowerCase() === stat.toLowerCase()
+  const primaryValue = boostedStat ? classStatValues + 2 : classStatValues
+  const secondaryValue = boostedStat
+    ? subClassStatValues + 4
+    : subClassStatValues
+
+  return {
+    primaryValue,
+    secondaryValue,
+    boostedStat,
+    classStatValues,
+  }
+}
+
 export function getHeroClassGrowth (heroClass) {
   return HeroStatsGrowth[heroClass]
 }

@@ -2,17 +2,10 @@ import React from 'react'
 import { isEmpty, round, at, sum, values } from 'lodash'
 import { SwordsIcon, InfoIcon } from '../../utils/icons/solid'
 import Gauge from '../../utils/gauge'
-import Tooltip from '../../utils/tooltip'
-import {
-  Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-} from 'chart.js'
+import DFKTooltip from '../../utils/tooltip'
+import { extractStatAffinity } from '../../../lib/helpers/hero'
+import { STAT_ABBR_MAP } from '../../../lib/constants'
 import { Radar } from 'react-chartjs-2'
-
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler)
 
 const CHART_STATS = [
   'strength',
@@ -53,7 +46,7 @@ function InfoDetails (props) {
   }
 
   const data = {
-    labels: CHART_STATS,
+    labels: CHART_STATS.map((stat) => STAT_ABBR_MAP[stat]),
     datasets: [
       {
         label: 'Initial Stats',
@@ -80,7 +73,7 @@ function InfoDetails (props) {
   }
 
   return (
-    <Tooltip title={<InfoIcon />} identifier={`pvp-score-${hero.id}`}>
+    <DFKTooltip title={<InfoIcon />} identifier={`pvp-score-${hero.id}`}>
       <div className='column'>
         <div className='tooltip-content-title row'>
           <span>Rank:</span>
@@ -133,7 +126,7 @@ function InfoDetails (props) {
           <Radar data={data} options={options} />
         </div>
       </div>
-    </Tooltip>
+    </DFKTooltip>
   )
 }
 

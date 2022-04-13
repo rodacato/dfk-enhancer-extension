@@ -15,11 +15,11 @@ export default function Gauge (props) {
     <div className='gauge'>
       <CircularProgressbarWithChildren
         value={percentage}
-        circleRatio={0.5}
+        circleRatio={0.6}
         strokeWidth={10}
         styles={buildStyles({
           strokeLinecap: 'butt',
-          rotation: 0.75,
+          rotation: 1 / 2 + 1 / 5,
           pathColor: '#3c6fd0',
           trailColor: '#fff3',
         })}

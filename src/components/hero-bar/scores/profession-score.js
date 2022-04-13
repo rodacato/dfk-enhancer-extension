@@ -7,7 +7,7 @@ import ScoreBar from '../../utils/score-bar'
 import {
   calculateOPERScore,
   getHeroClassProfessionAffinity,
-  getHeroClassGrowth,
+  extractStatAffinity,
 } from '../../../lib/helpers/hero'
 import { STAT_ABBR_MAP, HeroProfessionStats } from '../../../lib/constants'
 
@@ -46,23 +46,16 @@ function AffinityScoreBar (props) {
 
 function AffinityStatRow (props) {
   const { hero, stat } = props
-  const classAffinity = getHeroClassGrowth(hero.mainClass)
-  const classStatValues = classAffinity[stat].primary
-
-  const subClassAffinity = getHeroClassGrowth(hero.subClass)
-  const subClassStatValues = subClassAffinity[stat].secondary
-
-  const boostedStat = hero.blueGene.toLowerCase() === stat.toLowerCase()
+  const {
+    primaryValue,
+    secondaryValue,
+    classStatValues,
+    boostedStat,
+  } = extractStatAffinity(hero, stat)
   const extraClasses = includes(HeroProfessionStats[hero.profession], stat)
     ? 'profession-stat-affin'
     : ''
-
   const color = boostedStat ? '#b44d94' : '#3c6fd0'
-  const primaryValue = boostedStat ? classStatValues + 2 : classStatValues
-
-  const secodaryValue = boostedStat
-    ? subClassStatValues + 4
-    : subClassStatValues
 
   return (
     <tr className={extraClasses}>
@@ -74,7 +67,7 @@ function AffinityStatRow (props) {
       <td collspan='3'>
         <ScoreBar color={color} current={classStatValues} max={100} />
       </td>
-      <td>{secodaryValue}%</td>
+      <td>{secondaryValue}%</td>
     </tr>
   )
 }
@@ -97,25 +90,29 @@ function InfoDetails (props) {
           <span>Main Class Affinity</span>
           <table>
             <tbody>
-              <tr>
+              <tr key='affin-total'>
                 <td colSpan='6'>
                   <AffinityScoreBar hero={hero} />
                 </td>
               </tr>
-              <tr>
+              <tr key='affin-titles'>
                 <td></td>
                 <td>Primary</td>
                 <td collspan='3'></td>
                 <td>Seconday</td>
               </tr>
-              <AffinityStatRow hero={hero} stat='strength' />
-              <AffinityStatRow hero={hero} stat='dexterity' />
-              <AffinityStatRow hero={hero} stat='agility' />
-              <AffinityStatRow hero={hero} stat='vitality' />
-              <AffinityStatRow hero={hero} stat='endurance' />
-              <AffinityStatRow hero={hero} stat='intelligence' />
-              <AffinityStatRow hero={hero} stat='wisdom' />
-              <AffinityStatRow hero={hero} stat='luck' />
+              <AffinityStatRow key='affin-str' hero={hero} stat='strength' />
+              <AffinityStatRow key='affin-dex' hero={hero} stat='dexterity' />
+              <AffinityStatRow key='affin-agi' hero={hero} stat='agility' />
+              <AffinityStatRow key='affin-vit' hero={hero} stat='vitality' />
+              <AffinityStatRow key='affin-end' hero={hero} stat='endurance' />
+              <AffinityStatRow
+                key='affin-int'
+                hero={hero}
+                stat='intelligence'
+              />
+              <AffinityStatRow key='affin-wis' hero={hero} stat='wisdom' />
+              <AffinityStatRow key='affin-lck' hero={hero} stat='luck' />
             </tbody>
           </table>
         </div>

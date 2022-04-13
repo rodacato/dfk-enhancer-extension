@@ -18,14 +18,14 @@ function TavernScores (props) {
       <div className='column'>
         <ProfessionScore
           hero={hero}
-          score={profession}
+          score={profession || {}}
           heroesCount={heroesCount}
         />
       </div>
       <div className='column'>
         <PvPScore
           hero={hero}
-          score={pvp}
+          score={pvp || {}}
           heroesCount={heroesCount}
           tavernStats={tavernStats}
         />
@@ -33,7 +33,7 @@ function TavernScores (props) {
       <div className='column'>
         <SummoningScore
           hero={hero}
-          score={summoning}
+          score={summoning || {}}
           heroesCount={heroesCount}
         />
       </div>
