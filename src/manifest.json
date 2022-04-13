@@ -1,32 +1,35 @@
 {
   "manifest_version": 3,
   "name": "DeFi Kingdoms Enhancer",
+  "options_page": "options.html",
+  "background": { "service_worker": "background.bundle.js" },
   "action": {
-    "default_icon": "assets/icons/icon.png"
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
   },
   "icons": {
-    "16": "assets/icons/icon_16.png",
-    "48": "assets/icons/icon_48.png",
-    "128": "assets/icons/icon_128.png"
-  },
-  "background": {
-    "service_worker": "assets/js/background.bundle.js"
+    "16": "icon_16.png",
+    "34": "icon_34.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
   },
   "host_permissions": ["https://dfk-enhancer-service.global.ssl.fastly.net/*"],
+  "permissions": [
+    "alarms",
+    "notifications",
+    "storage"
+  ],
   "content_scripts": [
     {
-      "matches": [
-        "https://*.defikingdoms.com/"
-      ],
-      "js": [
-        "assets/js/content.bundle.js"
-      ]
+      "matches": ["https://*.defikingdoms.com/"],
+      "js": ["content.bundle.js"],
+      "css": ["content.styles.css"]
     }
   ],
+  "devtools_page": "devtools.html",
   "web_accessible_resources": [
     {
-      "resources": [
-      ],
+      "resources": ["content.styles.css", "icon_128.png", "icon_34.png"],
       "matches": []
     }
   ]

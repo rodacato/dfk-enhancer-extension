@@ -1,0 +1,22 @@
+.modal-content {
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    right: calc(50% - 300px);
+    top: calc(50% - 200px);
+    background: black;
+    border: 1px solid darkgoldenrod;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+.modal-label {
+    cursor: pointer;
+}
