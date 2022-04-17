@@ -11,13 +11,11 @@
 }
 
 .loading-box {
-	display: inline-block;
 	border-radius: 3px;
-	float: right;
-	padding: 1em;
-	position: relative;
-	margin-bottom: .25em;
-	vertical-align: top;
+    vertical-align: top;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .loading-box .loading-gift {

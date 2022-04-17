@@ -15,7 +15,6 @@
   "dependencies": {
     "@harmony-js/core": "^0.1.57",
     "@hot-loader/react-dom": "^17.0.1",
-    "abi-decoder": "^2.4.0",
     "assert": "^2.0.0",
     "chart.js": "^3.7.1",
     "clean-webpack-plugin": "^4.0.0",

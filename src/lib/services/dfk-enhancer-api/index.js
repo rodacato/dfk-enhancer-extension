@@ -1,23 +1,17 @@
 import { DFK_ENHANCER_SERVICE_URL } from '../../constants'
-import { normalizeTavernHero, normalizeTavernHeroStatsGrowth } from './schema'
 
-const fetchHeroTavernStats = async function (id) {
-  const url = `${DFK_ENHANCER_SERVICE_URL}/dfk-tavern/heroes/${id}/stats`
+export const fetchHeroTavernStats = async function (id) {
+  const url = `${DFK_ENHANCER_SERVICE_URL}/api/heroes/${id}/tavern_stats`
   const response = await fetch(url)
   const data = await response.json()
 
-  return normalizeTavernHero(data.profRanking[0])
+  return data
 }
 
-const fetchHeroTavernStatsGrowth = async function (id) {
-  const url = `${DFK_ENHANCER_SERVICE_URL}/dfk-tavern/heroes/${id}/stats-growth`
+export const fetchHero = async function (id) {
+  const url = `${DFK_ENHANCER_SERVICE_URL}/api/heroes/${id}`
   const response = await fetch(url)
   const data = await response.json()
 
-  return normalizeTavernHeroStatsGrowth(data)
-}
-
-export default {
-  fetchHeroTavernStats,
-  fetchHeroTavernStatsGrowth,
+  return data
 }

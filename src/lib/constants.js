@@ -1,5 +1,5 @@
 export const DFK_ENHANCER_SERVICE_URL =
-  'https://dfk-enhancer-service.global.ssl.fastly.net'
+  'https://dfk-enhancer-service.vercel.app'
 
 export const HERO_CARD_ACTIVE_CLASS = 'dfk-ext-active'
 
@@ -12,6 +12,17 @@ export const STAT_ABBR_MAP = {
   intelligence: 'INT',
   wisdom: 'WIS',
   luck: 'LCK',
+}
+
+export const STATS_NAMES_MAP = {
+  STR: 'strength',
+  DEX: 'dexterity',
+  AGI: 'agility',
+  VIT: 'vitality',
+  END: 'endurance',
+  INT: 'intelligence',
+  WIS: 'wisdom',
+  LCK: 'luck',
 }
 
 // Extracted from https://docs.google.com/spreadsheets/d/1jfG6E6otW1V6ZLQycF5DumoBr_LrpQaz7cTmDPpwV2s/edit#gid=1814662006

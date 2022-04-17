@@ -1,5 +1,5 @@
 import React from 'react'
-import { isEmpty, round, at, sum, values } from 'lodash'
+import { round, at, sum, values } from 'lodash'
 import { SwordsIcon, InfoIcon } from '../../utils/icons/solid'
 import Gauge from '../../utils/gauge'
 import DFKTooltip from '../../utils/tooltip'
@@ -23,9 +23,9 @@ function InfoDetails (props) {
   let initStats
   let currentStats
 
-  if (!isEmpty(tavernStats)) {
-    initStats = tavernStats.initStats
-    currentStats = tavernStats.currentStats
+  if (tavernStats?.initial && tavernStats?.current) {
+    initStats = tavernStats.initial
+    currentStats = tavernStats.current
   } else {
     initStats = {
       strength: 0,

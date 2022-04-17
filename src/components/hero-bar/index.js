@@ -10,30 +10,34 @@ import { ExternalLinkIcon, ReloadIcon } from '../utils/icons/solid'
 import './style.css'
 
 function TavernScores (props) {
-  const { tavernStats, hero } = props
-  const { heroesCount, profession, pvp, summoning } = props.tavernScore
+  const { hero, tavernScore } = props
+  const { heroesCount, scores, stats } = tavernScore
+
+  if (hero.loading) {
+    return <Loading />
+  }
 
   return (
     <div className='row'>
       <div className='column'>
         <ProfessionScore
           hero={hero}
-          score={profession || {}}
+          score={scores.profession}
           heroesCount={heroesCount}
         />
       </div>
       <div className='column'>
         <PvPScore
           hero={hero}
-          score={pvp || {}}
+          score={scores.pvp}
           heroesCount={heroesCount}
-          tavernStats={tavernStats}
+          tavernStats={stats}
         />
       </div>
       <div className='column'>
         <SummoningScore
           hero={hero}
-          score={summoning || {}}
+          score={scores.summoning}
           heroesCount={heroesCount}
         />
       </div>
@@ -41,30 +45,36 @@ function TavernScores (props) {
   )
 }
 
+const tavernScoreInitialState = {
+  heroesCount: 0,
+  scores: {
+    profession: {},
+    summoning: {},
+    pvp: {},
+  },
+  stats: {
+    initial: undefined,
+    current: undefined,
+  },
+}
+
 function HeroBar (props) {
-  const { heroId } = props
-  const [hero, setHero] = useState(null)
-  const [tavernScore, setTavernScore] = useState({})
-  const [tavernStats, setTavernStats] = useState({})
+  const { heroBase } = props
+  const [hero, setHero] = useState({ ...heroBase, loading: true })
+  const [tavernScore, setTavernScore] = useState(tavernScoreInitialState)
 
   const loadHero = function () {
-    internalApi.getHero(heroId).then((response) => {
-      setHero(response)
+    internalApi.getHero(hero.id).then((response) => {
+      setHero({ ...response, loading: false })
     })
-
-    internalApi.getHeroDFKTavernStats(heroId).then((response) => {
+    internalApi.getHeroDFKTavernStats(hero.id).then((response) => {
       setTavernScore(response)
-    })
-
-    internalApi.getHeroDFKTavernStatsGrowth(heroId).then((response) => {
-      setTavernStats(response)
     })
   }
 
   const resetHero = function () {
-    setHero(null)
-    setTavernScore({})
-    setTavernStats({})
+    setHero({ ...heroBase, loading: true })
+    setTavernScore(tavernScoreInitialState)
   }
 
   const reloadHero = function () {
@@ -78,26 +88,14 @@ function HeroBar (props) {
     loadHero()
   }, [])
 
-  if (!hero) {
-    return <Loading />
-  }
-
   return (
     <div className='wrapper'>
       <div className='hero-title row'>
-        <HeroTitle
-          hero={hero}
-          tavernStats={tavernStats}
-          tavernScore={tavernScore}
-        />
+        <HeroTitle hero={hero} tavernScore={tavernScore} />
       </div>
       <hr className='separator' />
       <div className='hero-scores'>
-        <TavernScores
-          hero={hero}
-          tavernScore={tavernScore}
-          tavernStats={tavernStats}
-        />
+        <TavernScores hero={hero} tavernScore={tavernScore} />
       </div>
 
       <div className='dfk-tavern-link'>

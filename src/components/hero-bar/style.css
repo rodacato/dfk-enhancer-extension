@@ -48,11 +48,18 @@
     margin: auto 10px auto 5px;
 }
 .hero-title .hero-profession .profession-name {
-    flex: 3;
+    flex: 4;
     text-transform: capitalize;
 }
 .hero-title .hero-profession .hero-stat {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
     background-color: black;
+    border: 1px solid white;
+    padding: 1px;
+    width: 25px;
+    margin-left: 10px;
 }
 
 
@@ -137,16 +144,6 @@
 
 .hero-profession .profession-awards {
     margin-left: 5px;
-}
-
-.hero-profession .hero-stat .title {
-    font-size: 10px;
-    font-weight: bold;
-    text-align: center;
-}
-.hero-profession .hero-stat .value {
-    font-size: 12px;
-    text-align: center;
 }
 
 .separator {

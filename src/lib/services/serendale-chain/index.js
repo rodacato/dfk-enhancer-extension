@@ -1,5 +1,4 @@
 import { Contract, providers } from 'ethers'
-import { extractHeroData } from './schemas'
 
 export const RPC = new providers.JsonRpcProvider(
   'https://harmony-0-rpc.gateway.pokt.network'
@@ -38,27 +37,3 @@ export const contracts = {
   hero: new Contract(contractAddrs.hero, contractJson.hero.abi, RPC),
   auction: new Contract(contractAddrs.auction, contractJson.auction.abi, RPC),
 }
-
-const getHero = function (heroId) {
-  return contracts.hero.getHero(heroId).then((response) => {
-    return extractHeroData(response)
-  })
-}
-
-export default {
-  getHero,
-}
-// export const expansionSet = {
-//   sd: 0,
-//   cv: 0,
-// }
-
-// export const expansionArraySet = {
-//   sd: [],
-//   cv: [],
-// }
-
-// export const expansionObjSet = {
-//   sd: {},
-//   cv: {},
-// }

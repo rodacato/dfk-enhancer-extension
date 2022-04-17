@@ -1,1 +1,0 @@
-export { extractHeroData } from './hero'
