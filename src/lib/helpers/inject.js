@@ -5,9 +5,14 @@ import HeroBar from '../../components/hero-bar'
 import { STATS_NAMES_MAP } from '../../lib/constants'
 
 export const enhanceHeroCard = async (card) => {
-  const { cardWrapper } = extractContainerInfo(card)
+  if (card.classList.contains('dfk-enhancer-loaded')) {
+    return
+  }
 
-  if (!cardWrapper || cardWrapper.querySelector('.dfk-hero-bar')) {
+  card.classList.add('dfk-enhancer-loaded')
+
+  const { cardWrapper, section } = extractContainerInfo(card)
+  if (!cardWrapper) {
     return
   }
 
@@ -18,22 +23,44 @@ export const enhanceHeroCard = async (card) => {
   cardWrapper.prepend(div)
 
   const selector = cardWrapper.querySelector('[class="dfk-hero-bar"]')
-  cardWrapper
-    .querySelectorAll('.dfk-hero-bar + div > div')
-    .forEach((e) => e.remove())
+  // cardWrapper
+  //   .querySelectorAll('.dfk-hero-bar + div > div')
+  //   .forEach((e) => e.remove())
 
   ReactModal.setAppElement(selector)
-  ReactDOM.render(<HeroBar heroBase={hero} />, selector)
+  ReactDOM.render(<HeroBar heroBase={hero} section={section} />, selector)
 }
 
 const extractContainerInfo = function (card) {
-  let cardWrapper = card.closest('.buy-heroes-list-box')
+  let section
+  let cardWrapper
+  let sectionTitle = card
+    .closest('.modal-overlay')
+    .querySelector('.dk-modal--header h4').textContent
 
-  if (cardWrapper) {
-    return { cardWrapper }
+  console.log(sectionTitle)
+
+  switch (sectionTitle) {
+    case 'Your Heroes':
+      cardWrapper = card.closest('.buy-heroes-list-box')
+      section = 'your_heroes'
+      break
+    case 'View Hero':
+      cardWrapper = card.closest('.cardContainer').parentElement
+      section = 'view_heroe'
+      break
+    case 'Buy Heroes':
+      cardWrapper = card.closest('.buy-heroes-list-box')
+      section = 'buy_heroes'
+      break
+    case 'Sell Heroes':
+      cardWrapper = card.closest('.buy-heroes-list-box')
+      section = 'sell_heroes'
+      break
+    default:
   }
 
-  return { cardWrapper: card.parentElement }
+  return { cardWrapper, section }
 }
 
 const extractHeroInfo = function (wrapper) {
@@ -44,7 +71,7 @@ const extractHeroInfo = function (wrapper) {
   const heroInfoGrid = wrapper.querySelector('[class*="heroInfo"]')
   const professionGrid = wrapper.querySelector('[class*="skillList"]')
   const professionLevels = professionGrid.querySelectorAll(
-    '[class*="styles_skillLevel"]'
+    '[class*="skillLevel"]'
   )
 
   let statBoost1 = wrapper.querySelector('[class*="statBoost"]')?.textContent
@@ -65,17 +92,16 @@ const extractHeroInfo = function (wrapper) {
       .querySelector('[class*="class"]')
       .childNodes[1].textContent.toLowerCase(),
     profession: professionGrid
-      .querySelector('[class*="styles_chosen"]')
+      .querySelector('[class*="chosen"]')
       .childNodes[0].textContent.toLowerCase(),
     rarity: heroInfoGrid
-      .querySelector('[class*="styles_cardRarity"]')
+      .querySelector('[class*="cardRarity"]')
       .textContent.toLowerCase(),
-    level:
-      heroInfoGrid.querySelector('[class*="styles_level"]').childNodes[1] * 1,
+    level: heroInfoGrid.querySelector('[class*="level"]').childNodes[1] * 1,
     greenGene: STATS_NAMES_MAP[statBoost1.toUpperCase()],
     blueGene: STATS_NAMES_MAP[statBoost2.toUpperCase()],
     generation:
-      heroInfoGrid.querySelector('[class*="styles_level"]').childNodes[2]
+      heroInfoGrid.querySelector('[class*="level"]').childNodes[2]
         .childNodes[1] * 1,
     xp:
       wrapper.querySelector('[class*="statXp"]').childNodes[2].childNodes[0]

@@ -50,6 +50,7 @@
 .hero-title .hero-profession .profession-name {
     flex: 4;
     text-transform: capitalize;
+    text-align: left;
 }
 .hero-title .hero-profession .hero-stat {
     font-size: 12px;
