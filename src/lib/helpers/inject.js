@@ -12,7 +12,7 @@ export const enhanceHeroCard = async (card) => {
   card.classList.add('dfk-enhancer-loaded')
 
   const { cardWrapper, section } = extractContainerInfo(card)
-  if (!cardWrapper) {
+  if (!cardWrapper || cardWrapper.querySelector('.dfk-hero-bar')) {
     return
   }
 
