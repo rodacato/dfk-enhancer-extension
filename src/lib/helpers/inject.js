@@ -65,7 +65,7 @@ const extractContainerInfo = function (card) {
 
 const extractHeroInfo = function (wrapper) {
   let heroId =
-    wrapper.querySelector('[class*="heroID"]').childNodes[1].textContent * 1
+    wrapper.querySelector('[class*="heroID"]').childNodes[3].textContent * 1
 
   const statsGrid = wrapper.querySelectorAll('[class*="statList"] > div')
   const heroInfoGrid = wrapper.querySelector('[class*="heroInfo"]')
@@ -97,12 +97,14 @@ const extractHeroInfo = function (wrapper) {
     rarity: heroInfoGrid
       .querySelector('[class*="cardRarity"]')
       .textContent.toLowerCase(),
-    level: heroInfoGrid.querySelector('[class*="level"]').childNodes[1] * 1,
+    level:
+      heroInfoGrid.querySelector('[class*="level"]').childNodes[1].textContent *
+      1,
     greenGene: STATS_NAMES_MAP[statBoost1.toUpperCase()],
     blueGene: STATS_NAMES_MAP[statBoost2.toUpperCase()],
     generation:
-      heroInfoGrid.querySelector('[class*="level"]').childNodes[2]
-        .childNodes[1] * 1,
+      heroInfoGrid.querySelector('[class*="level"]').childNodes[2].childNodes[1]
+        .textContent * 1,
     xp:
       wrapper.querySelector('[class*="statXp"]').childNodes[2].childNodes[0]
         .textContent * 1,
@@ -119,10 +121,10 @@ const extractHeroInfo = function (wrapper) {
       visual: {},
     },
     professions_stats: {
-      mining: professionLevels[0] * 1.0,
-      gardening: professionLevels[1] * 1.0,
-      fishing: professionLevels[2] * 1.0,
-      foraging: professionLevels[3] * 1.0,
+      mining: professionLevels[0].textContent * 1.0,
+      gardening: professionLevels[1].textContent * 1.0,
+      fishing: professionLevels[2].textContent * 1.0,
+      foraging: professionLevels[3].textContent * 1.0,
     },
     stats: {
       strength:
