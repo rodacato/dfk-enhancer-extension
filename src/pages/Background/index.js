@@ -32,15 +32,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(request, sender)
 
   if (request.command === 'getHeroDFKTavernStats') {
-    fetchHeroTavernStats(request.payload.heroId).then((heroData) => {
-      sendResponse(heroData)
-    })
+    fetchHeroTavernStats(request.payload.heroId, request.payload.network).then(
+      (heroData) => {
+        sendResponse(heroData)
+      }
+    )
   }
 
   if (request.command === 'getHero') {
-    fetchHero(request.payload.heroId).then((heroData) => {
-      sendResponse(heroData)
-    })
+    fetchHero(request.payload.heroId, request.payload.network).then(
+      (heroData) => {
+        sendResponse(heroData)
+      }
+    )
   }
 
   return true

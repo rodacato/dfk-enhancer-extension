@@ -59,15 +59,15 @@ const tavernScoreInitialState = {
 }
 
 function HeroBar (props) {
-  const { heroBase } = props
+  const { heroBase, section, network } = props
   const [hero, setHero] = useState({ ...heroBase, loading: true })
   const [tavernScore, setTavernScore] = useState(tavernScoreInitialState)
 
   const loadHero = function () {
-    internalApi.getHero(hero.id).then((response) => {
+    internalApi.getHero(hero.id, network).then((response) => {
       setHero({ ...response, loading: false })
     })
-    internalApi.getHeroDFKTavernStats(hero.id).then((response) => {
+    internalApi.getHeroDFKTavernStats(hero.id, network).then((response) => {
       setTavernScore(response)
     })
   }

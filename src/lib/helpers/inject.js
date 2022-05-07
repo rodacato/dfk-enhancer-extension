@@ -4,7 +4,15 @@ import ReactModal from 'react-modal'
 import HeroBar from '../../components/hero-bar'
 import { STATS_NAMES_MAP } from '../../lib/constants'
 
-export const enhanceHeroCard = async (card) => {
+export const detectNetwork = function () {
+  if (document.querySelector('a[href*="subnets.avax.network"]')) {
+    return 'crystalvale'
+  }
+
+  return 'serendale'
+}
+
+export const enhanceHeroCard = async (card, network) => {
   if (card.classList.contains('dfk-enhancer-loaded')) {
     return
   }
@@ -28,7 +36,10 @@ export const enhanceHeroCard = async (card) => {
   //   .forEach((e) => e.remove())
 
   ReactModal.setAppElement(selector)
-  ReactDOM.render(<HeroBar heroBase={hero} section={section} />, selector)
+  ReactDOM.render(
+    <HeroBar heroBase={hero} section={section} network={network} />,
+    selector
+  )
 }
 
 const extractContainerInfo = function (card) {

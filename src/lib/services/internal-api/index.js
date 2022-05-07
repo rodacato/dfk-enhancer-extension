@@ -1,7 +1,7 @@
-const getHero = function (heroId) {
+const getHero = function (heroId, network) {
   const promise = new Promise((resolve) => {
     chrome.runtime.sendMessage(
-      { command: 'getHero', payload: { heroId } },
+      { command: 'getHero', payload: { heroId, network } },
       (response) => {
         resolve(response)
       }
@@ -11,10 +11,10 @@ const getHero = function (heroId) {
   return promise
 }
 
-const getHeroDFKTavernStats = function (heroId) {
+const getHeroDFKTavernStats = function (heroId, network) {
   const promise = new Promise((resolve) => {
     chrome.runtime.sendMessage(
-      { command: 'getHeroDFKTavernStats', payload: { heroId } },
+      { command: 'getHeroDFKTavernStats', payload: { heroId, network } },
       (response) => {
         resolve(response)
       }
