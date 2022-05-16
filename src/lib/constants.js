@@ -114,6 +114,28 @@ const monk = {
   luck: { primary: 30, secondary: 7.5 },
 }
 
+const berserker = {
+  strength: { primary: 80, secondary: 20 },
+  dexterity: { primary: 60, secondary: 15 },
+  agility: { primary: 55, secondary: 13.75 },
+  vitality: { primary: 65, secondary: 16.25 },
+  endurance: { primary: 60, secondary: 15 },
+  intelligence: { primary: 20, secondary: 5 },
+  wisdom: { primary: 20, secondary: 5 },
+  luck: { primary: 40, secondary: 10 },
+}
+
+const seer = {
+  strength: { primary: 30, secondary: 7.5 },
+  dexterity: { primary: 30, secondary: 7.5 },
+  agility: { primary: 55, secondary: 13.75 },
+  vitality: { primary: 50, secondary: 12.5 },
+  endurance: { primary: 50, secondary: 12.5 },
+  intelligence: { primary: 70, secondary: 17.5 },
+  wisdom: { primary: 80, secondary: 20 },
+  luck: { primary: 35, secondary: 8.75 },
+}
+
 const paladin = {
   strength: { primary: 80, secondary: 20 },
   dexterity: { primary: 40, secondary: 10 },
@@ -156,6 +178,17 @@ const summoner = {
   intelligence: { primary: 85, secondary: 21.25 },
   wisdom: { primary: 85, secondary: 21.25 },
   luck: { primary: 40, secondary: 10 },
+}
+
+const shapeshifter = {
+  strength: { primary: 65, secondary: 16.25 },
+  dexterity: { primary: 70, secondary: 17.5 },
+  agility: { primary: 80, secondary: 20 },
+  vitality: { primary: 65, secondary: 16.25 },
+  endurance: { primary: 55, secondary: 13.75 },
+  intelligence: { primary: 25, secondary: 6.25 },
+  wisdom: { primary: 45, secondary: 11.25 },
+  luck: { primary: 45, secondary: 11.25 },
 }
 
 const dragoon = {
@@ -263,10 +296,13 @@ export const HeroStatsGrowth = {
   wizard,
   monk,
   pirate,
+  berserker,
+  seer,
   paladin,
   darkknight,
   summoner,
   ninja,
+  shapeshifter,
   dragoon,
   sage,
   dreadknight,
@@ -281,6 +317,8 @@ export const MainClass = {
   5: 'Wizard',
   6: 'Monk',
   7: 'Pirate',
+  8: 'Berserker',
+  9: 'Seer',
   10: 'Paladin',
   11: 'DarkKnight',
   12: 'Summoner',
@@ -289,6 +327,7 @@ export const MainClass = {
   17: 'DarkKnight',
   18: 'Summoner',
   19: 'Ninja',
+  20: 'ShapeShifter',
   '1c': 'DreadKnight',
   24: 'Dragoon',
   25: 'Sage',
@@ -487,10 +526,13 @@ export const GenesMapping = {
     5: 'Wizard',
     6: 'Monk',
     7: 'Pirate',
+    8: 'Berserker',
+    9: 'Seer',
     16: 'Paladin',
     17: 'DarkKnight',
     18: 'Summoner',
     19: 'Ninja',
+    20: 'ShapeShifter',
     24: 'Dragoon',
     25: 'Sage',
     28: 'DreadKnight',
