@@ -27,21 +27,21 @@ export default function HeroTitle (props) {
         <div className='column' style={{ flex: 5 }}>
           <span style={{ fontSize: '14px' }}>
             #{hero.id} - {hero.profession}
+            <div className='profession-awards'>
+              {hero.profession === bestProfession && (
+                <span title='Match profession'> 💎</span>
+              )}
+              {hasBlueStatAffinity(hero.profession, hero.blueGene) && (
+                <span title='Blue stat match with profession'> ⭐️</span>
+              )}
+              {hasGoodOPERScore(hero) && (
+                <span title='OPER Score is higher than 60%'> 🏆</span>
+              )}
+              {hasGoodProfessionAndClassAffinity(hero) && (
+                <span title='Profession affinity is higher than 80%'> 🌡</span>
+              )}
+            </div>
           </span>
-          <div className='profession-awards'>
-            {hero.profession === bestProfession && (
-              <span title='Match profession'> 💎</span>
-            )}
-            {hasBlueStatAffinity(hero.profession, hero.blueGene) && (
-              <span title='Blue stat match with profession'> ⭐️</span>
-            )}
-            {hasGoodOPERScore(hero) && (
-              <span title='OPER Score is higher than 60%'> 🏆</span>
-            )}
-            {hasGoodProfessionAndClassAffinity(hero) && (
-              <span title='Profession affinity is higher than 80%'> 🌡</span>
-            )}
-          </div>
         </div>
         <div className='column'>
           <div className='hero-stat'>{sum(values(hero.stats))}</div>
