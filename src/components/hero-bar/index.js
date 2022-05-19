@@ -13,10 +13,6 @@ function TavernScores (props) {
   const { hero, tavernScore } = props
   const { heroesCount, scores, stats } = tavernScore
 
-  if (hero.loading) {
-    return <Loading />
-  }
-
   return (
     <div className='row'>
       <div className='column'>
@@ -60,12 +56,23 @@ const tavernScoreInitialState = {
 
 function HeroBar (props) {
   const { heroBase, section, network } = props
-  const [hero, setHero] = useState({ ...heroBase, loading: true })
+  const [hero, setHero] = useState({ ...heroBase })
   const [tavernScore, setTavernScore] = useState(tavernScoreInitialState)
+  const [loading, setLoading] = useState({
+    inProgress: true,
+    loadingAttempts: 0,
+  })
 
   const loadHero = function () {
+    if (loading.inProgress === false || loading.loadingAttempts >= 5) {
+      return
+    }
+
+    setLoading({ ...loading, loadingAttempts: loading.loadingAttempts + 1 })
+
     internalApi.getHero(hero.id, network).then((response) => {
-      setHero({ ...response, loading: false })
+      setHero({ ...response })
+      setLoading({ ...loading, inProgress: false })
     })
     internalApi.getHeroDFKTavernStats(hero.id, network).then((response) => {
       setTavernScore(response)
@@ -73,7 +80,8 @@ function HeroBar (props) {
   }
 
   const resetHero = function () {
-    setHero({ ...heroBase, loading: true })
+    setHero({ ...heroBase })
+    setLoading({ inProgress: true, loadingAttempts: 0 })
     setTavernScore(tavernScoreInitialState)
   }
 
@@ -95,7 +103,10 @@ function HeroBar (props) {
       </div>
       <hr className='separator' />
       <div className='hero-scores'>
-        <TavernScores hero={hero} tavernScore={tavernScore} />
+        {loading.inProgress && <Loading />}
+        {!loading.inProgress && (
+          <TavernScores hero={hero} tavernScore={tavernScore} />
+        )}
       </div>
 
       <div className='dfk-tavern-link'>

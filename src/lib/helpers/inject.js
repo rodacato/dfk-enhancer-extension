@@ -20,6 +20,8 @@ export const enhanceHeroCard = async (card, network) => {
   card.classList.add('dfk-enhancer-loaded')
 
   const { cardWrapper, section } = extractContainerInfo(card)
+
+  // Note: Dont display hero enhancements if the section is unknown
   if (!cardWrapper || cardWrapper.querySelector('.dfk-hero-bar')) {
     return
   }
@@ -31,9 +33,6 @@ export const enhanceHeroCard = async (card, network) => {
   cardWrapper.prepend(div)
 
   const selector = cardWrapper.querySelector('[class="dfk-hero-bar"]')
-  // cardWrapper
-  //   .querySelectorAll('.dfk-hero-bar + div > div')
-  //   .forEach((e) => e.remove())
 
   ReactModal.setAppElement(selector)
   ReactDOM.render(
@@ -47,26 +46,36 @@ const extractContainerInfo = function (card) {
   let cardWrapper
   let sectionTitle = card
     .closest('.modal-overlay')
-    .querySelector('.dk-modal--header h4').textContent
+    .querySelector('.dk-modal--header h4')
+    .textContent.toLowerCase()
+    .trim()
 
   console.log(sectionTitle)
 
   switch (sectionTitle) {
-    case 'Your Heroes':
+    case 'your heroes':
       cardWrapper = card.closest('.buy-heroes-list-box')
       section = 'your_heroes'
       break
-    case 'View Hero':
+    case 'view hero':
       cardWrapper = card.closest('.cardContainer').parentElement
       section = 'view_heroe'
       break
-    case 'Buy Heroes':
+    case 'buy heroes':
       cardWrapper = card.closest('.buy-heroes-list-box')
       section = 'buy_heroes'
       break
-    case 'Sell Heroes':
+    case 'sell heroes':
       cardWrapper = card.closest('.buy-heroes-list-box')
       section = 'sell_heroes'
+      break
+    case 'hire a hero':
+      cardWrapper = card.closest('.buy-heroes-list-box')
+      section = 'hire_heroes'
+      break
+    case 'select your hero':
+      cardWrapper = card.closest('.buy-heroes-list-box')
+      section = 'select_your_heroes'
       break
     default:
   }
