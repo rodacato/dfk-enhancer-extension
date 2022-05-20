@@ -38,28 +38,52 @@ export function hasGoodProfessionAndClassAffinity (hero) {
 }
 
 export function extractStatAffinity (hero, stat) {
-  const classAffinity = getHeroClassGrowth(hero.mainClass)
-  const classStatValues = classAffinity[stat].primary
+  const primaryBaseValue = getHeroPrimaryBaseStatsGrowth(hero.mainClass)[stat]
+  const secondaryBaseValue = getHeroSecondaryBaseStatsGrowth(hero.subClass)[
+    stat
+  ]
 
-  const subClassAffinity = getHeroClassGrowth(hero.subClass)
-  const subClassStatValues = subClassAffinity[stat].secondary
-
+  const primaryValue = hero.statsGrowth.primary[stat]
+  const secondaryValue = hero.statsGrowth.secondary[stat]
   const boostedStat = hero.blueGene.toLowerCase() === stat.toLowerCase()
-  const primaryValue = boostedStat ? classStatValues + 2 : classStatValues
-  const secondaryValue = boostedStat
-    ? subClassStatValues + 4
-    : subClassStatValues
 
   return {
     primaryValue,
+    primaryBaseValue,
     secondaryValue,
+    secondaryBaseValue,
     boostedStat,
-    classStatValues,
   }
 }
 
-export function getHeroClassGrowth (heroClass) {
-  return HeroStatsGrowth[heroClass]
+export function getHeroPrimaryBaseStatsGrowth (heroClass) {
+  const statsGrowth = HeroStatsGrowth[heroClass]
+
+  return {
+    strength: statsGrowth.strength.primary,
+    dexterity: statsGrowth.dexterity.primary,
+    agility: statsGrowth.agility.primary,
+    vitality: statsGrowth.vitality.primary,
+    endurance: statsGrowth.endurance.primary,
+    intelligence: statsGrowth.intelligence.primary,
+    wisdom: statsGrowth.wisdom.primary,
+    luck: statsGrowth.luck.primary,
+  }
+}
+
+export function getHeroSecondaryBaseStatsGrowth (heroClass) {
+  const statsGrowth = HeroStatsGrowth[heroClass]
+
+  return {
+    strength: statsGrowth.strength.secondary,
+    dexterity: statsGrowth.dexterity.secondary,
+    agility: statsGrowth.agility.secondary,
+    vitality: statsGrowth.vitality.secondary,
+    endurance: statsGrowth.endurance.secondary,
+    intelligence: statsGrowth.intelligence.secondary,
+    wisdom: statsGrowth.wisdom.secondary,
+    luck: statsGrowth.luck.secondary,
+  }
 }
 
 export function getHeroClassProfessionAffinity (hero) {

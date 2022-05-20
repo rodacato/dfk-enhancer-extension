@@ -8,6 +8,8 @@ import {
   calculateOPERScore,
   getHeroClassProfessionAffinity,
   extractStatAffinity,
+  getHeroPrimaryBaseStatsGrowth,
+  getHeroSecondaryBaseStatsGrowth,
 } from '../../../lib/helpers/hero'
 import { STAT_ABBR_MAP, HeroProfessionStats } from '../../../lib/constants'
 
@@ -48,26 +50,30 @@ function AffinityStatRow (props) {
   const { hero, stat } = props
   const {
     primaryValue,
+    primaryBaseValue,
     secondaryValue,
-    classStatValues,
+    secondaryBaseValue,
     boostedStat,
   } = extractStatAffinity(hero, stat)
   const extraClasses = includes(HeroProfessionStats[hero.profession], stat)
     ? 'profession-stat-affin'
     : ''
   const color = boostedStat ? '#b44d94' : '#3c6fd0'
+  const primaryDiff = primaryValue - primaryBaseValue
+  const secondaryDiff = secondaryValue - secondaryBaseValue
 
   return (
     <tr className={extraClasses}>
+      <td>{STAT_ABBR_MAP[stat]}</td>
       <td>
-        {STAT_ABBR_MAP[stat]}
-        {boostedStat && '*'}
+        {primaryValue}% {primaryDiff > 0 && `(+${primaryDiff}%)`}
       </td>
-      <td>{primaryValue}%</td>
       <td collspan='3'>
-        <ScoreBar color={color} current={classStatValues} max={100} />
+        <ScoreBar color={color} current={primaryValue} max={100} />
       </td>
-      <td>{secondaryValue}%</td>
+      <td>
+        {secondaryValue}% {secondaryDiff > 0 && `(+${secondaryDiff}%)`}
+      </td>
     </tr>
   )
 }

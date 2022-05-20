@@ -4,6 +4,10 @@ import ReactModal from 'react-modal'
 import HeroBar from '../../components/hero-bar'
 import InventoryItem from '../../components/inventory-item'
 import { STATS_NAMES_MAP } from '../../lib/constants'
+import {
+  getHeroPrimaryBaseStatsGrowth,
+  getHeroSecondaryBaseStatsGrowth,
+} from '../../lib/helpers/hero'
 
 export const detectNetwork = function () {
   if (document.querySelector('a[href*="subnets.avax.network"]')) {
@@ -181,6 +185,11 @@ const extractHeroInfo = function (wrapper) {
         statsGrid[6].querySelector('[class*="statPoint"]').textContent * 1,
       luck: statsGrid[7].querySelector('[class*="statPoint"]').textContent * 1,
     },
+  }
+
+  heroData.statsGrowth = {
+    primary: getHeroPrimaryBaseStatsGrowth(heroData.mainClass),
+    secondary: getHeroSecondaryBaseStatsGrowth(heroData.subClass),
   }
 
   return heroData
