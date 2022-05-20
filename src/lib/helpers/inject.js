@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactModal from 'react-modal'
 import HeroBar from '../../components/hero-bar'
+import InventoryItem from '../../components/inventory-item'
 import { STATS_NAMES_MAP } from '../../lib/constants'
 
 export const detectNetwork = function () {
@@ -10,6 +11,23 @@ export const detectNetwork = function () {
   }
 
   return 'serendale'
+}
+
+export const enhanceInventoryItem = async (item, network) => {
+  if (item.querySelector('.dfk-inventory-bar')) {
+    return
+  }
+  const token = extractItemInfo(item)
+  if (!token || !token.quantity) {
+    return
+  }
+
+  let div = document.createElement('div')
+  div.className = 'dfk-inventory-bar'
+  item.prepend(div)
+
+  const selector = item.querySelector('.dfk-inventory-bar')
+  ReactDOM.render(<InventoryItem token={token} network={network} />, selector)
 }
 
 export const enhanceHeroCard = async (card, network) => {
@@ -166,4 +184,18 @@ const extractHeroInfo = function (wrapper) {
   }
 
   return heroData
+}
+
+const extractItemInfo = function (itemWrapper) {
+  let quantity =
+    itemWrapper.querySelector('[class*="InventoryBlock_quantity"]')
+      ?.textContent * 1
+  quantity ||=
+    itemWrapper.querySelector('[class*="RewardBlock_quantity"]')?.textContent *
+    1
+
+  return {
+    quantity: quantity,
+    name: itemWrapper.querySelector('img')?.alt,
+  }
 }

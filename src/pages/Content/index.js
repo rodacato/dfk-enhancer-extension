@@ -1,4 +1,8 @@
-import { enhanceHeroCard, detectNetwork } from '../../lib/helpers/inject'
+import {
+  enhanceHeroCard,
+  enhanceInventoryItem,
+  detectNetwork,
+} from '../../lib/helpers/inject'
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -10,7 +14,8 @@ import {
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip)
 
-const observer = new MutationObserver(function (mutations, obs) {
+// Heros observer
+const herosObserver = new MutationObserver(function (mutations, obs) {
   const network = detectNetwork(document)
 
   document.querySelectorAll('.cardContainer').forEach((card) => {
@@ -18,7 +23,29 @@ const observer = new MutationObserver(function (mutations, obs) {
   })
 })
 
-observer.observe(document, {
+herosObserver.observe(document, {
+  childList: true,
+  subtree: true,
+})
+
+/// Inventory observer
+const inventoryObserver = new MutationObserver(function (mutations, obs) {
+  const network = detectNetwork(document)
+
+  document
+    .querySelectorAll(
+      '.fancy-modal-blocker [class*="InventoryBlock_inventoryBlock"] img',
+      '.fancy-modal-blocker [class*="RewardBlock_rewardBlock"] img'
+    )
+    .forEach((image) => {
+      let item = image.closest('[class*="InventoryBlock_inventoryBlock"]')
+      item ||= image.closest('[class*="RewardBlock_rewardBlock"]')
+
+      enhanceInventoryItem(item, network)
+    })
+})
+
+inventoryObserver.observe(document, {
   childList: true,
   subtree: true,
 })

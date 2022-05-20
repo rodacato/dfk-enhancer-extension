@@ -1,6 +1,7 @@
 import {
   fetchHeroTavernStats,
   fetchHero,
+  fetchItem,
 } from '../../lib/services/dfk-enhancer-api'
 
 // console.log('auction', contracts.auction)
@@ -43,6 +44,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     fetchHero(request.payload.heroId, request.payload.network).then(
       (heroData) => {
         sendResponse(heroData)
+      }
+    )
+  }
+
+  if (request.command === 'getItem') {
+    fetchItem(request.payload.address, request.payload.network).then(
+      (token) => {
+        sendResponse(token)
       }
     )
   }

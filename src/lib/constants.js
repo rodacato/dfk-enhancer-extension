@@ -25,6 +25,392 @@ export const STATS_NAMES_MAP = {
   LCK: 'luck',
 }
 
+export const BASE_CLASS_STATS_SUM = {
+  common: 62,
+  uncommon: 64,
+  rare: 66,
+  legendary: 68,
+  mythic: 70,
+}
+
+export const ITEMS = [
+  {
+    symbol: 'DFKAMBRTFY',
+    address: '0x6e1bC01Cc52D165B357c42042cF608159A2B81c1',
+    name: 'Ambertaffy',
+  },
+  {
+    symbol: 'DFKANTBLND',
+    address: '0x1771dEc8D9A29F30d82443dE0a69e7b6824e2F53',
+    name: 'Anti-blinding Potion',
+  },
+  {
+    symbol: 'DFKANTPSN',
+    address: '0xA1f8b0E88c51a45E152934686270DDF4E3356278',
+    name: 'Anti-poison Potion',
+  },
+  {
+    symbol: 'DFKATONECR',
+    address: '0x27dC6AaaD95580EdF25F8B9676f1B984e09e413d',
+    name: 'Atonement Crystal',
+  },
+  {
+    symbol: 'DFKBLOATER',
+    address: '0x78aED65A2Cc40C7D8B0dF1554Da60b38AD351432',
+    name: 'Bloater',
+  },
+  {
+    symbol: 'DFKBLUEEGG',
+    address: '0x9678518e04Fe02FB30b55e2D0e554E26306d0892',
+    name: 'Blue Pet Egg',
+  },
+  {
+    symbol: 'DFKBLUESTEM',
+    address: '0xAC5c49Ff7E813dE1947DC74bbb1720c353079ac9',
+    name: 'Bluestem',
+  },
+  {
+    symbol: 'DFKCHSCR',
+    address: '0x45B53E55b5c0A10fdd4fE2079a562d5702F3A033',
+    name: 'Chaos Crystal',
+  },
+  {
+    symbol: 'DFKCHSST',
+    address: '0x3633F956410163A98D58D2D928B38C64A488654e',
+    name: 'Chaos Stone',
+  },
+  {
+    symbol: 'DFKDRKWD',
+    address: '0x68EA4640C5ce6cC0c9A1F17B7b882cB1cBEACcd7',
+    name: 'Darkweed',
+  },
+  {
+    symbol: 'DFKFHLTHPTN',
+    address: '0x87361363A75c9A6303ce813D0B2656c34B68FF52',
+    name: 'Full Health',
+  },
+  {
+    symbol: 'DFKFINCR',
+    address: '0xc6A58eFc320A7aFDB1cD662eaf6de10Ee17103F2',
+    name: 'Finesse Crystal',
+  },
+  {
+    symbol: 'DFKFINST',
+    address: '0xD0B689Cb5DE0c15792Aa456C89D64038C1F2EedC',
+    name: 'Finesse Stone',
+  },
+  {
+    symbol: 'DFKFMNPTN',
+    address: '0xDc2C698aF26Ff935cD1c50Eef3a4A933C62AF18D',
+    name: 'Full Mana Potion',
+  },
+  {
+    symbol: 'DFKFRTICR',
+    address: '0x603919AEB55EB13F9CDE94274fC54ab2Bd2DecE7',
+    name: 'Fortitude Crystal',
+  },
+  {
+    symbol: 'DFKFRTIST',
+    address: '0x17Fa96ba9d9C29e4B96d29A7e89a4E7B240E3343',
+    name: 'Fortitude Stone',
+  },
+  {
+    symbol: 'DFKFRTUCR',
+    address: '0x6D777C64f0320d8A5b31BE0FdeB694007Fc3ed45',
+    name: 'Fortune Crystal',
+  },
+  {
+    symbol: 'DFKFRTUST',
+    address: '0x5da2EffE9857DcEcB786E13566Ff37B92e1E6862',
+    name: 'Fortune Stone',
+  },
+  {
+    symbol: 'DFKGATONECR',
+    address: '0x17f3B5240C4A71a3BBF379710f6fA66B9b51f224',
+    name: 'Greater Atonement Crystal',
+  },
+  {
+    symbol: 'DFKGLDVN',
+    address: '0x600541aD6Ce0a8b5dae68f086D46361534D20E80',
+    name: 'Goldvein',
+  },
+  {
+    symbol: 'DFKGOLD',
+    address: '0x3a4EDcf3312f44EF027acfd8c21382a5259936e7',
+    name: 'Gold',
+  },
+  {
+    symbol: 'DFKGOLDEGG',
+    address: '0x9edb3Da18be4B03857f3d39F83e5C6AAD67bc148',
+    name: 'Golden Egg',
+  },
+  {
+    symbol: 'DFKGREENEGG',
+    address: '0x6d605303e9Ac53C59A3Da1ecE36C9660c7A71da5',
+    name: 'Green Pet Egg',
+  },
+  {
+    symbol: 'DFKGREGG',
+    address: '0x95d02C1Dc58F05A015275eB49E107137D9Ee81Dc',
+    name: 'Grey Pet Egg',
+  },
+  {
+    symbol: 'DFKHLTHPTN',
+    address: '0x2789F04d22a845dC854145d3c289240517f2BcF0',
+    name: 'Health',
+  },
+  {
+    symbol: 'DFKINSCR',
+    address: '0x117E60775584CdfA4f414E22b075F31cC9c3207C',
+    name: 'Insight Crystal',
+  },
+  {
+    symbol: 'DFKINSST',
+    address: '0x9D71Bb9C781FC2eBdD3d6cb709438e3c71200149',
+    name: 'Insight Stone',
+  },
+  {
+    symbol: 'DFKIRONSCALE',
+    address: '0xe4Cfee5bF05CeF3418DA74CFB89727D8E4fEE9FA',
+    name: 'Ironscale',
+  },
+  {
+    symbol: 'DFKLANTERNEYE',
+    address: '0x8Bf4A0888451C6b5412bCaD3D9dA3DCf5c6CA7BE',
+    name: 'Lanterneye',
+  },
+  {
+    symbol: 'DFKLATONECR',
+    address: '0x1f3F655079b70190cb79cE5bc5AE5F19dAf2A6Cf',
+    name: 'Lesser Atonement Crystal',
+  },
+  {
+    symbol: 'DFKLCHSCR',
+    address: '0xa509c34306AdF6168268A213Cc47D336630bf101',
+    name: 'Lesser Chaos Crystal',
+  },
+  {
+    symbol: 'DFKLCHSST',
+    address: '0x6D4f4bC32df561a35C05866051CbE9C92759Da29',
+    name: 'Lesser Chaos Stone',
+  },
+  {
+    symbol: 'DFKLFINCR',
+    address: '0x39927A2CEE5580d63A163bc402946C7600300373',
+    name: 'Lesser Finesse Crystal',
+  },
+  {
+    symbol: 'DFKLFINST',
+    address: '0xbb5614D466b77d50DdEd994892DFe6F0ACA4eEbb',
+    name: 'Lesser Finesse Stone',
+  },
+  {
+    symbol: 'DFKLFRTICR',
+    address: '0x3017609B9A59B77B708D783835B6fF94a3D9E337',
+    name: 'Lesser Fortitude Crystal',
+  },
+  {
+    symbol: 'DFKLFRTIST',
+    address: '0x1f57eb682377f5Ad6276b9315412920BdF9530f6',
+    name: 'Lesser Fortitude Stone',
+  },
+  {
+    symbol: 'DFKLFRTUCR',
+    address: '0x13AF184aEA970Fe79E3BB7A1B0B156B195fB1f40',
+    name: 'Lesser Fortune Crystal',
+  },
+  {
+    symbol: 'DFKLFRTUST',
+    address: '0x6D6eA1D2Dc1Df6Eaa2153f212d25Cf92d13Be628',
+    name: 'Lesser Fortune Stone',
+  },
+  {
+    symbol: 'DFKLINSCR',
+    address: '0xc63b76f710e9973b8989678eb16234CfADc8D9DB',
+    name: 'Lesser Insight Crystal',
+  },
+  {
+    symbol: 'DFKLINSST',
+    address: '0x762b98B3758d0A5Eb95B3E4A1E2914Ce0A80D99c',
+    name: 'Lesser Insight Stone',
+  },
+  {
+    symbol: 'DFKLMGHTCR',
+    address: '0xaB464901AFBc61bAC440a97Fa568aC42885Da58B',
+    name: 'Lesser Might Crystal',
+  },
+  {
+    symbol: 'DFKLMGHTST',
+    address: '0xe4E7C0c693d8A7FC159776a993495378705464A7',
+    name: 'Lesser Might Stone',
+  },
+  {
+    symbol: 'DFKLSWFTCR',
+    address: '0xf5c26F2F34E9245C3A9ea0B0e7Ea7B33E6404Da0',
+    name: 'Lesser Swiftness Crystal',
+  },
+  {
+    symbol: 'DFKLSWFTST',
+    address: '0xd9A8abC0Ce1ADC23F1c1813986c9a9C21C9e7510',
+    name: 'Lesser Swiftness Stone',
+  },
+  {
+    symbol: 'DFKLVGRCR',
+    address: '0x0d8403E47445DB9E316E36F476dacD5827220Bdd',
+    name: 'Lesser Vigor Crystal',
+  },
+  {
+    symbol: 'DFKLVGRST',
+    address: '0xB00CbF5Cd5e7b321436C2D3d8078773522D2F073',
+    name: 'Lesser Vigor Stone',
+  },
+  {
+    symbol: 'DFKLWITCR',
+    address: '0x17ff2016c9ecCFBF4Fc4DA6EF95Fe646D2c9104F',
+    name: 'Lesser Wit Crystal',
+  },
+  {
+    symbol: 'DFKLWITST',
+    address: '0x4Ff7A020ec1100D36d5C81F3D4815F2e9C704b59',
+    name: 'Lesser Wit Stone',
+  },
+  {
+    symbol: 'DFKMGCRSPTN',
+    address: '0x7e120334D9AFFc0982719A4eacC045F78BF41C68',
+    name: 'Magic Resistance Potion',
+  },
+  {
+    symbol: 'DFKMGHTCR',
+    address: '0xb368f69bE6eDa74700763672AEB2Ae63f3d20AE6',
+    name: 'Might Crystal',
+  },
+  {
+    symbol: 'DFKMGHTST',
+    address: '0xE7F6ea1cE7BbEbC9F2Cf080010dd938d2D8D8B1b',
+    name: 'Might Stone',
+  },
+  {
+    symbol: 'DFKMILKWEED',
+    address: '0xc0214b37FCD01511E6283Af5423CF24C96BB9808',
+    name: 'Milkweed',
+  },
+  {
+    symbol: 'DFKMNPTN',
+    address: '0x19b020001AB0C12Ffa93e1FDeF90c7C37C8C71ef',
+    name: 'Mana Vial',
+  },
+  {
+    symbol: 'DFKMOKSHA',
+    address: '0x8F655142104478724bbC72664042EA09EBbF7B38',
+    name: 'Moksha Rune',
+  },
+  {
+    symbol: 'DFKRCKRT',
+    address: '0x6B10Ad6E3b99090De20bF9f95F960addC35eF3E2',
+    name: 'Rockroot',
+  },
+  {
+    symbol: 'DFKRDLF',
+    address: '0x094243DfABfBB3E6F71814618ace53f07362a84c',
+    name: 'Redleaf',
+  },
+  {
+    symbol: 'DFKREDGILL',
+    address: '0xc5891912718ccFFcC9732D1942cCD98d5934C2e1',
+    name: 'Redgill',
+  },
+  {
+    symbol: 'DFKRGWD',
+    address: '0x043F9bd9Bb17dFc90dE3D416422695Dd8fa44486',
+    name: 'Ragweed',
+  },
+  {
+    symbol: 'DFKSAILFISH',
+    address: '0xb80A07e13240C31ec6dc0B5D72Af79d461dA3A70',
+    name: 'Sailfish',
+  },
+  {
+    symbol: 'DFKSHIMMERSKIN',
+    address: '0x372CaF681353758f985597A35266f7b330a2A44D',
+    name: 'ShimmerSkin',
+  },
+  {
+    symbol: 'DFKSHVAS',
+    address: '0x66F5BfD910cd83d3766c4B39d13730C911b2D286',
+    name: 'Shvas Rune',
+  },
+  {
+    symbol: 'DFKSILVERFIN',
+    address: '0x2493cfDAcc0f9c07240B5B1C4BE08c62b8eEff69',
+    name: 'Silverfin',
+  },
+  {
+    symbol: 'DFKSPIDRFRT',
+    address: '0x19B9F05cdE7A61ab7aae5b0ed91aA62FF51CF881',
+    name: 'Spiderfruit',
+  },
+  {
+    symbol: 'DFKSTMNPTN',
+    address: '0x959ba19508827d1ed2333B1b503Bd5ab006C710e',
+    name: 'Stamina Vial',
+  },
+  {
+    symbol: 'DFKSWFTCR',
+    address: '0x5d7f20e3B0f1406Bf038175218eA7e9B4838908c',
+    name: 'Swiftness Crystal',
+  },
+  {
+    symbol: 'DFKSWFTHSL',
+    address: '0xCdfFe898E687E941b124dfB7d24983266492eF1d',
+    name: 'Swift-Thistle',
+  },
+  {
+    symbol: 'DFKSWFTPTN',
+    address: '0x872dD1595544CE22ad1e0174449C7ECE6F0bb01b',
+    name: 'Swiftness Potion',
+  },
+  {
+    symbol: 'DFKSWFTST',
+    address: '0x08f362517aD4119d93bBCd20825c2E4119abB495',
+    name: 'Swiftness Stone',
+  },
+  {
+    symbol: 'DFKTEARS',
+    address: '0x24eA0D436d3c2602fbfEfBe6a16bBc304C963D04',
+    name: 'Gaia’s Tears',
+  },
+  {
+    symbol: 'DFKTFNSPTN',
+    address: '0xFb03c364969a0bB572Ce62b8Cd616A7DDEb4c09A',
+    name: 'Toughness Potion',
+  },
+  {
+    symbol: 'DFKVGRCR',
+    address: '0xBbA50bD111DC586Fd1f2B1476B6eC505800A3FD0',
+    name: 'Vigor Crystal',
+  },
+  {
+    symbol: 'DFKVGRST',
+    address: '0x9df75917aC9747B4A70fa033E4b0182d85B62857',
+    name: 'Vigor Stone',
+  },
+  {
+    symbol: 'DFKWITCR',
+    address: '0x3619fc2386FbBC19DDC39d29A72457e758CFAD69',
+    name: 'Wit Crystal',
+  },
+  {
+    symbol: 'DFKWITST',
+    address: '0x939Ea05C81aAC48F7C10BdB08615082B82C80c63',
+    name: 'Wit Stone',
+  },
+  {
+    symbol: 'DFKYELLOWEGG',
+    address: '0x3dB1fd0Ad479A46216919758144FD15A21C3e93c',
+    name: 'Yellow Pet Egg',
+  },
+]
+
 // Extracted from https://docs.google.com/spreadsheets/d/1jfG6E6otW1V6ZLQycF5DumoBr_LrpQaz7cTmDPpwV2s/edit#gid=1814662006
 const warrior = {
   strength: { primary: 75, secondary: 18.75 },
