@@ -67,7 +67,7 @@ const extractContainerInfo = function (card) {
   let section
   let cardWrapper
   let sectionTitle = card
-    .closest('.modal-overlay')
+    .closest('reach-portal')
     .querySelector('.dk-modal--header h4')
     .textContent.toLowerCase()
     .trim()
@@ -140,22 +140,27 @@ const extractHeroInfo = function (wrapper) {
       .querySelector('[class*="cardRarity"]')
       .textContent.toLowerCase(),
     level:
-      heroInfoGrid.querySelector('[class*="level"]').childNodes[1].textContent *
-      1,
+      heroInfoGrid
+        .querySelector('[class*="level"]')
+        .childNodes[1].textContent.replace(/^\D+/g, '') * 1,
     greenGene: STATS_NAMES_MAP[statBoost1.toUpperCase()],
     blueGene: STATS_NAMES_MAP[statBoost2.toUpperCase()],
     generation:
-      heroInfoGrid.querySelector('[class*="level"]').childNodes[2].childNodes[1]
-        .textContent * 1,
+      heroInfoGrid
+        .querySelector('[class*="level"]')
+        .childNodes[1].textContent.replace(/^\D+/g, '') * 1,
     xp:
-      wrapper.querySelector('[class*="statXp"]').childNodes[2].childNodes[0]
-        .textContent * 1,
+      wrapper
+        .querySelector('[class*="statXp"]')
+        .childNodes[2].childNodes[0].textContent.replace(/^\D+/g, '') * 1,
     hp:
-      wrapper.querySelector('[class*="heroHealth"]').childNodes[1].textContent *
-      1,
+      wrapper
+        .querySelector('[class*="heroHealth"]')
+        .childNodes[1].textContent.replace(/^\D+/g, '') * 1,
     mp:
-      wrapper.querySelector('[class*="heroMana"]').childNodes[1].textContent *
-      1,
+      wrapper
+        .querySelector('[class*="heroMana"]')
+        .childNodes[1].textContent.replace(/^\D+/g, '') * 1,
     statsGenes: '',
     visualGenes: '',
     recessiveGenes: {
