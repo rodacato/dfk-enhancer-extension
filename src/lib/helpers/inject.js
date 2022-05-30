@@ -125,8 +125,14 @@ const extractHeroInfo = function (wrapper) {
     statBoost2 = statBoostDouble
   }
 
+  const normalizedHeroId = wrapper
+    .querySelector('[class*="styles_cuteJewel"]')
+    .src.match('crystal')
+    ? 1000000000000 + heroId
+    : heroId
+
   const heroData = {
-    id: heroId,
+    id: normalizedHeroId,
     mainClass: heroInfoGrid
       .querySelector('[class*="class"]')
       .childNodes[0].textContent.toLowerCase(),

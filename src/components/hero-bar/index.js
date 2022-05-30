@@ -71,7 +71,7 @@ function HeroBar (props) {
     setLoading({ ...loading, loadingAttempts: loading.loadingAttempts + 1 })
 
     internalApi.getHero(hero.id, network).then((response) => {
-      setHero({ ...response })
+      setHero({ ...response, id: heroBase.id })
       setLoading({ ...loading, inProgress: false })
     })
     internalApi.getHeroDFKTavernStats(hero.id, network).then((response) => {
