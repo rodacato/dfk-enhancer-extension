@@ -5,8 +5,10 @@ import {
   // For calculate OPER Score
   HeroProfessionChances,
   HeroRarityProfessionMultiplier,
+  STAT_ABBR_MAP,
+  BASE_CLASS_STATS_SUM,
 } from '../constants'
-import { includes } from 'lodash'
+import { compact, values, reduce, toPairs, includes } from 'lodash'
 
 export function calculateOPERScore (hero) {
   return {
@@ -15,6 +17,28 @@ export function calculateOPERScore (hero) {
     gardening: calculateOPERScorePercentage(hero, 'gardening'),
     foraging: calculateOPERScorePercentage(hero, 'foraging'),
   }
+}
+
+export function hasEnhancements (hero) {
+  let enhanced = false
+  const enhancements = toPairs(STAT_ABBR_MAP).map((key) => {
+    const { primaryValue, primaryBaseValue } = extractStatAffinity(hero, key[0])
+
+    return primaryValue - primaryBaseValue
+  })
+  const enhancementsSum = reduce(enhancements, (sum, n) => {
+    return sum + n
+  })
+
+  if (enhancementsSum > 2) {
+    enhanced = true
+  }
+
+  if (hero.level === 1 && sumStats(hero) > BASE_CLASS_STATS_SUM[hero.rarity]) {
+    enhanced = true
+  }
+
+  return enhanced
 }
 
 export function hasGoodOPERScore (hero) {
@@ -35,6 +59,13 @@ export function hasGoodProfessionAndClassAffinity (hero) {
   const current = heroClassProfessionAffinity.mainClass.value
 
   return current >= max * 0.8
+}
+
+export function sumStats (hero) {
+  const stats = values(hero.stats)
+  return reduce(stats, (sum, n) => {
+    return sum + n
+  })
 }
 
 export function extractStatAffinity (hero, stat) {

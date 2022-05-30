@@ -4,6 +4,7 @@ import {
   hasBlueStatAffinity,
   hasGoodProfessionAndClassAffinity,
   hasGoodOPERScore,
+  hasEnhancements,
 } from '../../lib/helpers/hero'
 
 function BestProfession (props) {
@@ -27,7 +28,10 @@ export default function HeroTitle (props) {
         <div className='column' style={{ flex: 5 }}>
           <span style={{ fontSize: '14px' }}>
             #{hero.id} - {hero.profession}
-            <div className='profession-awards'>
+            <div
+              className='profession-awards'
+              style={{ fontSize: '12px', float: 'right', lineHeight: '20px' }}
+            >
               {hero.profession === bestProfession && (
                 <span title='Match profession'> 💎</span>
               )}
@@ -39,6 +43,12 @@ export default function HeroTitle (props) {
               )}
               {hasGoodProfessionAndClassAffinity(hero) && (
                 <span title='Profession affinity is higher than 80%'> 🌡</span>
+              )}
+              {hasEnhancements(hero) && (
+                <span title='Hero enhanced with stones or gaias tears'>
+                  {' '}
+                  💉
+                </span>
               )}
             </div>
           </span>
